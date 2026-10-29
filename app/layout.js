@@ -1,7 +1,7 @@
 import "./globals.css";
 
 const site = process.env.NEXT_PUBLIC_SITE_URL || "https://lestari-portfolio.vercel.app";
-const desc = "Portofolio Monica Putri Lestari Panjaitan — mahasiswa Teknologi Informasi Institut Teknologi Del, full-stack developer & UI/UX enthusiast.";
+const desc = "Portfolio of Monica Putri Lestari Panjaitan — Information Technology student at Institut Teknologi Del: Data Analyst, UI/UX Designer, Web Developer.";
 
 export const metadata = {
   metadataBase: new URL(site),
@@ -15,7 +15,7 @@ export const viewport = { width: "device-width", initialScale: 1, viewportFit: "
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="id">
+    <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />

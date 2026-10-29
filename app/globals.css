@@ -100,3 +100,51 @@ footer { text-align: center; padding: 3rem 1rem 0; font-size: 0.88rem; color: va
   .topnav a:hover { background: var(--butter); }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; scroll-behavior: auto !important; transition: none !important; } }
+
+/* ===== new: network, language toggle, IT code window, animations ===== */
+.net { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+.progress { position: fixed; top: 0; left: 0; z-index: 70; height: 3px; width: calc(var(--sp, 0) * 100%); background: var(--moss); }
+.lang { position: fixed; z-index: 60; top: calc(12px + env(safe-area-inset-top)); right: 72px; height: 50px; padding: 0 0.5rem; border: 1px solid var(--line); border-radius: 999px; background: #fff; box-shadow: var(--shadow); cursor: pointer; display: flex; align-items: center; gap: 0.15rem; }
+.lang b { padding: 0.35rem 0.7rem; border-radius: 999px; font-size: 0.85rem; color: var(--muted); transition: 0.2s; }
+.lang b.on { background: var(--pine); color: #fff; }
+.hi, .im { font-size: clamp(2.2rem, 9vw, 4rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; }
+.n1 { color: #e0709a; } .n2 { color: var(--moss); } .n3 { color: var(--pine); }
+.role { font-size: clamp(1.2rem, 4.5vw, 1.7rem); color: var(--pine); }
+.role b { color: #e0709a; }
+.cta { margin-top: 0; }
+.socials { display: flex; gap: 0.7rem; margin-top: 1.6rem; }
+.socials a { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: var(--pine); color: #fff; transition: transform 0.2s, background 0.2s; }
+.socials a:hover { transform: translateY(-4px); background: var(--moss); }
+.polaroid { animation: bob 6s ease-in-out infinite; }
+@keyframes bob { 50% { transform: rotate(3deg) translateY(-10px); } }
+.code { background: #1f3a2c; color: #e9f2e4; border-radius: 18px; padding: 1rem 1.2rem; font: 0.86rem/1.85 ui-monospace, "Cascadia Code", Consolas, monospace; box-shadow: var(--shadow); overflow-x: auto; align-self: start; }
+.code .dots { display: flex; gap: 6px; margin-bottom: 0.7rem; }
+.code .dots i { width: 11px; height: 11px; border-radius: 50%; background: #ff8fa6; }
+.code .dots i:nth-child(2) { background: #ffe08a; } .code .dots i:nth-child(3) { background: #8fe3b0; }
+.code .l { display: block; white-space: pre; opacity: 0; }
+.code.in .l { animation: ln 0.5s forwards; animation-delay: calc(var(--i) * 0.25s); }
+@keyframes ln { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: none; } }
+.code em { font-style: normal; } .code .k { color: #ff9ec0; } .code .s { color: #ffe08a; } .code .c { color: #8fe3b0; }
+.cover { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 16px; display: block; margin-bottom: 0.9rem; transition: transform 0.4s; }
+.card:hover .cover { transform: scale(1.03); }
+.team { aspect-ratio: 4 / 3; object-position: center 30%; margin: 1rem 0 0.2rem; }
+.cert .cover { aspect-ratio: 4 / 3; object-fit: contain; background: #fff; border: 1px solid var(--line); }
+.grid.two { grid-template-columns: 1fr; }
+.card ul { padding-left: 1.2rem; margin: 0 0 0.8rem; }
+.form { display: grid; gap: 0.9rem; }
+.form label { display: grid; gap: 0.3rem; font-weight: 700; font-size: 0.9rem; }
+.form input, .form textarea { font: inherit; padding: 0.8rem 1rem; border: 1px solid var(--line); border-radius: 14px; background: #fff; color: var(--pine); }
+.form .cta { justify-content: center; text-decoration: none; }
+.totop { right: 14px; bottom: calc(80px + env(safe-area-inset-bottom)); opacity: 0; pointer-events: none; transition: 0.3s; }
+.totop.show { opacity: 1; pointer-events: auto; }
+.rv { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease, box-shadow 0.3s; }
+.rv.in { opacity: 1; transform: none; }
+.grid > .rv:nth-child(2) { transition-delay: 0.12s; } .grid > .rv:nth-child(3) { transition-delay: 0.24s; }
+a.card:hover, .proj:hover { transform: translateY(-6px); }
+@media (min-width: 760px) {
+  .grid.two { grid-template-columns: repeat(2, 1fr); }
+  .grid.skills3 { grid-template-columns: repeat(3, 1fr); }
+  .two-col { grid-template-columns: 1.2fr 1fr; gap: 2.5rem; }
+}
+@media (min-width: 900px) { .lang { right: 14px; } }
+@media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; } .code .l { opacity: 1; animation: none; } }
