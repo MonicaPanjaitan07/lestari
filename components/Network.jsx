@@ -2,10 +2,9 @@
 
 import { useEffect, useRef } from "react";
 
-const CHARS = "01{}<>/=;()[]+-*#$&%".split("");
 const MOSS = "77,122,88";
-const PINE = "35,64,47";
 const PINK = "224,112,154";
+const DIRS = [[1, 0], [-1, 0], [0, 1], [0, -1]];
 
 export default function Network() {
   const ref = useRef(null);
@@ -16,17 +15,36 @@ export default function Network() {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const mouse = { x: -9999, y: -9999 };
     const rnd = (a, b) => a + Math.random() * (b - a);
-    const pick = () => CHARS[(Math.random() * CHARS.length) | 0];
 
-    let w = 0, h = 0, dpr = 1, size = 18, streams = [], raf = 0, last = 0;
+    let w = 0, h = 0, dpr = 1, cell = 56, cols = 0, rows = 0;
+    let packets = [], pings = [], raf = 0, last = 0, nextPing = 0;
 
-    const makeStream = (x, initial) => ({
-      x,
-      y: initial ? rnd(-h, h) : rnd(-h * 0.4, 0),
-      speed: rnd(35, 95),
-      len: 8 + ((Math.random() * 14) | 0),
-      chars: Array.from({ length: 24 }, pick),
-    });
+    const inside = (x, y) => x >= 0 && x <= cols * cell && y >= 0 && y <= rows * cell;
+
+    const pickDir = (p, allowTurn) => {
+      const options = DIRS.filter(([dx, dy]) => {
+        if (dx === -p.dx && dy === -p.dy) return false; // do not reverse
+        if (!allowTurn && (dx !== p.dx || dy !== p.dy)) return false;
+        return inside(p.x + dx * cell, p.y + dy * cell);
+      });
+      const pool = options.length ? options : DIRS.filter(([dx, dy]) => inside(p.x + dx * cell, p.y + dy * cell));
+      const d = pool[(Math.random() * pool.length) | 0];
+      p.dx = d[0];
+      p.dy = d[1];
+    };
+
+    const spawn = () => {
+      const p = {
+        x: ((Math.random() * cols) | 0) * cell,
+        y: ((Math.random() * rows) | 0) * cell,
+        dx: 1, dy: 0, dist: 0,
+        speed: rnd(70, 140),
+        col: Math.random() < 0.3 ? PINK : MOSS,
+        trail: [],
+      };
+      pickDir(p, true);
+      return p;
+    };
 
     const build = () => {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -35,50 +53,94 @@ export default function Network() {
       canvas.width = w * dpr;
       canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      size = w < 700 ? 16 : 18;
-      const gap = size * (w < 700 ? 2.2 : 1.8);
-      const cols = Math.floor(w / gap);
-      streams = [];
-      for (let i = 0; i < cols; i++) {
-        if (Math.random() < 0.4) continue; // dibuat jarang supaya tidak ramai
-        streams.push(makeStream(i * gap + gap / 2, true));
-      }
+      cell = w < 700 ? 44 : 56;
+      cols = Math.ceil(w / cell) + 1;
+      rows = Math.ceil(h / cell) + 1;
+      const count = Math.min(24, Math.max(8, Math.round((w * h) / 52000)));
+      packets = Array.from({ length: count }, spawn);
+      pings = [];
     };
 
     const draw = (dt) => {
       ctx.clearRect(0, 0, w, h);
-      ctx.font = `${size - 3}px ui-monospace, "Cascadia Code", Consolas, monospace`;
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
 
-      for (const s of streams) {
-        s.y += s.speed * dt;
-        if (s.y - s.len * size > h) Object.assign(s, makeStream(s.x, false));
+      // grid lines
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = `rgba(${MOSS},0.09)`;
+      ctx.beginPath();
+      for (let i = 0; i <= cols; i++) { ctx.moveTo(i * cell + 0.5, 0); ctx.lineTo(i * cell + 0.5, h); }
+      for (let j = 0; j <= rows; j++) { ctx.moveTo(0, j * cell + 0.5); ctx.lineTo(w, j * cell + 0.5); }
+      ctx.stroke();
 
-        for (let k = 0; k < s.len; k++) {
-          const y = s.y - k * size;
-          if (y < -size || y > h + size) continue;
-          if (Math.random() < 0.02) s.chars[k] = pick();
-
-          const fade = 1 - k / s.len;
-          const dx = s.x - mouse.x, dy = y - mouse.y;
-          const near = Math.max(0, 1 - Math.hypot(dx, dy) / 130);
-
+      // nodes (glow near the cursor)
+      for (let i = 0; i <= cols; i++) {
+        for (let j = 0; j <= rows; j++) {
+          const x = i * cell, y = j * cell;
+          const near = Math.max(0, 1 - Math.hypot(x - mouse.x, y - mouse.y) / 130);
           if (near > 0) {
-            ctx.fillStyle = `rgba(${PINK},${Math.min(0.9, 0.25 + near * 0.7)})`;
-          } else if (k === 0) {
-            ctx.fillStyle = `rgba(${PINE},0.5)`;
+            ctx.fillStyle = `rgba(${PINK},${0.25 + near * 0.6})`;
+            ctx.beginPath();
+            ctx.arc(x, y, 2 + near * 3.5, 0, 6.283);
+            ctx.fill();
           } else {
-            ctx.fillStyle = `rgba(${MOSS},${fade * 0.32})`;
+            ctx.fillStyle = `rgba(${MOSS},0.2)`;
+            ctx.fillRect(x - 1.5, y - 1.5, 3, 3);
           }
-          ctx.fillText(s.chars[k], s.x, y);
         }
+      }
+
+      // pings (ripples)
+      pings = pings.filter((p) => p.t < 1);
+      for (const p of pings) {
+        p.t += dt / 1.8;
+        ctx.strokeStyle = `rgba(${PINK},${(1 - p.t) * 0.5})`;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.t * 80, 0, 6.283);
+        ctx.stroke();
+      }
+
+      // data packets
+      for (const p of packets) {
+        const step = p.speed * dt;
+        p.x += p.dx * step;
+        p.y += p.dy * step;
+        p.dist += step;
+        if (p.dist >= cell) {
+          p.x = Math.round(p.x / cell) * cell;
+          p.y = Math.round(p.y / cell) * cell;
+          p.dist = 0;
+          pickDir(p, Math.random() < 0.4);
+        }
+        p.trail.push({ x: p.x, y: p.y });
+        if (p.trail.length > 26) p.trail.shift();
+
+        ctx.lineWidth = 2;
+        ctx.lineCap = "round";
+        for (let k = 1; k < p.trail.length; k++) {
+          ctx.strokeStyle = `rgba(${p.col},${(k / p.trail.length) * 0.5})`;
+          ctx.beginPath();
+          ctx.moveTo(p.trail[k - 1].x, p.trail[k - 1].y);
+          ctx.lineTo(p.trail[k].x, p.trail[k].y);
+          ctx.stroke();
+        }
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = `rgba(${p.col},0.9)`;
+        ctx.fillStyle = `rgba(${p.col},0.95)`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2.8, 0, 6.283);
+        ctx.fill();
+        ctx.shadowBlur = 0;
       }
     };
 
     const loop = (now) => {
       const dt = Math.min(0.05, (now - last) / 1000 || 0.016);
       last = now;
+      if (now > nextPing) {
+        pings.push({ x: ((Math.random() * cols) | 0) * cell, y: ((Math.random() * rows) | 0) * cell, t: 0 });
+        nextPing = now + rnd(1800, 3200);
+      }
       draw(dt);
       raf = requestAnimationFrame(loop);
     };
@@ -94,7 +156,7 @@ export default function Network() {
     const onVisibility = () => (document.hidden ? cancelAnimationFrame(raf) : start());
     let lastW = window.innerWidth;
     const onResize = () => {
-      if (window.innerWidth === lastW) return; // abaikan perubahan tinggi saat scroll di HP
+      if (window.innerWidth === lastW) return; // ignore height changes while scrolling on phones
       lastW = window.innerWidth;
       build();
     };

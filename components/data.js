@@ -1,4 +1,4 @@
-// ✏️ All portfolio content lives here. Each text has an English (en) and Indonesian (id) version.
+// All portfolio content lives here. Each text has an English (en) and Indonesian (id) version.
 export const L = (en, id) => ({ en, id });
 
 export const site = {
@@ -6,12 +6,28 @@ export const site = {
   roles: L(["Data Analyst", "UI/UX Designer", "Web Developer"], ["Data Analyst", "UI/UX Designer", "Web Developer"]),
   whatsapp: "6281717377269",
   chatText: L("Hi Monica, I saw your portfolio and would love to chat!", "Halo Monica, aku lihat portofoliomu dan mau ngobrol!"),
-  cv: "", // put a PDF in /public and write e.g. "/cv-monica.pdf" to show a CV button
+  cv: "/cv-monica.pdf", // put your PDF in /public with this exact name
+  photo: "/images/solo.jpg", // solo photo for the About section
+  collage: false, // true only if the photo has 4 panels (top-left one is shown)
+};
+
+// Logos (Devicon). Name must match the skill / stack text exactly.
+export const TECH = {
+  Laravel: "laravel/laravel-original",
+  Flutter: "flutter/flutter-original",
+  MySQL: "mysql/mysql-original",
+  Figma: "figma/figma-original",
+  PHP: "php/php-original",
+  HTML: "html5/html5-original",
+  CSS: "css3/css3-original",
+  JavaScript: "javascript/javascript-original",
+  "Next.js": "nextjs/nextjs-original",
 };
 
 export const ui = {
   hi: L("Hi There,", "Halo,"), im: L("I'm", "Aku"), into: L("I Am Into", "Aku Menekuni"),
-  aboutBtn: L("About", "Tentang"), cv: L("Download CV", "Unduh CV"),
+  open: L("Open to work", "Terbuka untuk kerja"),
+  aboutBtn: L("About", "Tentang"), cvBtn: L("View CV", "Lihat CV"), cvDl: L("Download", "Unduh"),
   aboutT: L("About Me", "Tentang Saya"), eduT: L("Education", "Pendidikan"), skillsT: L("Skills", "Keahlian"),
   projectsT: L("Projects", "Proyek"), certsT: L("Certifications & Training", "Sertifikasi & Pelatihan"), contactT: L("Let's Connect", "Mari Terhubung"),
   contactLead: L("Open to internships, freelance work, or just a chat about data, design, and the web.", "Terbuka untuk magang, freelance, atau sekadar ngobrol soal data, desain, dan web."),
@@ -19,6 +35,7 @@ export const ui = {
   name: L("Name", "Nama"), yourName: L("Your name", "Namamu"), message: L("Message", "Pesan"), write: L("Write your message", "Tulis pesanmu"),
   send: L("Send via WhatsApp", "Kirim lewat WhatsApp"), hello: L("Hi Monica, I'm", "Halo Monica, aku"),
   tapZoom: L("Tap an image to enlarge.", "Ketuk gambar untuk memperbesar."),
+  statProj: L("Projects", "Proyek"), statCert: L("Certificates", "Sertifikat"), statSkill: L("Skills", "Keahlian"),
 };
 
 export const navLinks = [
@@ -37,8 +54,8 @@ export const facts = [
   [L("From", "Asal"), L("Silaen, North Sumatra", "Silaen, Sumatera Utara")], [L("Hobby", "Hobi"), L("Traveling", "Traveling")],
 ];
 export const education = [
-  { school: "Institut Teknologi Del", major: L("Information Technology", "Teknologi Informasi"), place: L("Laguboti, North Sumatra", "Laguboti, Sumatera Utara"), note: L("Current student", "Mahasiswa aktif") },
-  { school: "SMA Negeri 1 Silaen", major: L("Science (IPA)", "IPA"), place: L("Silaen, North Sumatra", "Silaen, Sumatera Utara"), note: L("Graduated", "Lulus") },
+  { school: "Institut Teknologi Del", logo: "/logos/del.jpg", abbr: "DEL", major: L("Information Technology", "Teknologi Informasi"), place: L("Laguboti, North Sumatra", "Laguboti, Sumatera Utara"), note: L("Current student", "Mahasiswa aktif") },
+  { school: "SMA Negeri 1 Silaen", logo: "/logos/sma.jpg", abbr: "SMA", major: L("Science (IPA)", "IPA"), place: L("Silaen, North Sumatra", "Silaen, Sumatera Utara"), note: L("Graduated", "Lulus") },
 ];
 export const skills = [
   [L("Data", "Data"), ["Databases", "MySQL", "Data Engineering (bootcamp)"]],

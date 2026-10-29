@@ -1,29 +1,27 @@
 import "./globals.css";
+import { Sora, Outfit, JetBrains_Mono } from "next/font/google";
 
-const site = process.env.NEXT_PUBLIC_SITE_URL || "https://lestari-portfolio.vercel.app";
-const desc = "Portfolio of Monica Putri Lestari Panjaitan — Information Technology student at Institut Teknologi Del: Data Analyst, UI/UX Designer, Web Developer.";
+const sora = Sora({ subsets: ["latin"], variable: "--f-display", display: "swap" });
+const outfit = Outfit({ subsets: ["latin"], variable: "--f-body", display: "swap" });
+const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--f-mono", display: "swap" });
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://lestari-two.vercel.app";
 
 export const metadata = {
-  metadataBase: new URL(site),
+  metadataBase: new URL(siteUrl),
   title: "Monica Putri Lestari Panjaitan | Portfolio",
-  description: desc,
-  openGraph: { title: "Monica Putri Lestari Panjaitan | Portfolio", description: desc, type: "website", images: ["/og.png"] },
-  twitter: { card: "summary_large_image", title: "Monica Putri Lestari Panjaitan | Portfolio", description: desc, images: ["/og.png"] },
+  description: "Portfolio of Monica Putri Lestari Panjaitan: Data Analyst, UI/UX Designer, and Web Developer.",
+  openGraph: {
+    title: "Monica Putri Lestari Panjaitan | Portfolio",
+    description: "Data Analyst, UI/UX Designer, and Web Developer.",
+    url: siteUrl,
+    type: "website",
+  },
 };
-
-export const viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#e3ecd3" };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
-        />
-      </head>
+    <html lang="en" className={`${sora.variable} ${outfit.variable} ${mono.variable}`} suppressHydrationWarning>
       <body>{children}</body>
     </html>
   );
