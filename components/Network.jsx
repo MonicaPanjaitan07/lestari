@@ -1,36 +1,121 @@
 "use client";
+
 import { useEffect, useRef } from "react";
+
+const CHARS = "01{}<>/=;()[]+-*#$&%".split("");
+const MOSS = "77,122,88";
+const PINE = "35,64,47";
+const PINK = "224,112,154";
 
 export default function Network() {
   const ref = useRef(null);
+
   useEffect(() => {
-    const c = ref.current, x = c.getContext("2d");
-    let w, h, raf, m = { x: -999, y: -999 };
-    const rs = () => { w = c.width = innerWidth; h = c.height = innerHeight; };
-    rs();
-    const n = innerWidth < 700 ? 34 : 70;
-    const ps = Array.from({ length: n }, () => ({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5 }));
-    const mv = (e) => { m = { x: e.clientX, y: e.clientY }; };
-    addEventListener("resize", rs); addEventListener("pointermove", mv);
-    const line = (a, b, col, d, r) => { x.strokeStyle = `rgba(${col},${0.3 * (1 - d / r)})`; x.beginPath(); x.moveTo(a.x, a.y); x.lineTo(b.x, b.y); x.stroke(); };
-    const loop = () => {
-      x.clearRect(0, 0, w, h);
-      for (const p of ps) {
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < 0 || p.x > w) p.vx *= -1;
-        if (p.y < 0 || p.y > h) p.vy *= -1;
-        x.fillStyle = "rgba(60,80,65,.5)"; x.beginPath(); x.arc(p.x, p.y, 1.8, 0, 7); x.fill();
-        const d = Math.hypot(p.x - m.x, p.y - m.y);
-        if (d < 160) line(p, m, "224,112,154", d, 160);
+    const canvas = ref.current;
+    const ctx = canvas.getContext("2d");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const mouse = { x: -9999, y: -9999 };
+    const rnd = (a, b) => a + Math.random() * (b - a);
+    const pick = () => CHARS[(Math.random() * CHARS.length) | 0];
+
+    let w = 0, h = 0, dpr = 1, size = 18, streams = [], raf = 0, last = 0;
+
+    const makeStream = (x, initial) => ({
+      x,
+      y: initial ? rnd(-h, h) : rnd(-h * 0.4, 0),
+      speed: rnd(35, 95),
+      len: 8 + ((Math.random() * 14) | 0),
+      chars: Array.from({ length: 24 }, pick),
+    });
+
+    const build = () => {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      size = w < 700 ? 16 : 18;
+      const gap = size * (w < 700 ? 2.2 : 1.8);
+      const cols = Math.floor(w / gap);
+      streams = [];
+      for (let i = 0; i < cols; i++) {
+        if (Math.random() < 0.4) continue; // dibuat jarang supaya tidak ramai
+        streams.push(makeStream(i * gap + gap / 2, true));
       }
-      for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) {
-        const d = Math.hypot(ps[i].x - ps[j].x, ps[i].y - ps[j].y);
-        if (d < 130) line(ps[i], ps[j], "60,80,65", d, 130);
+    };
+
+    const draw = (dt) => {
+      ctx.clearRect(0, 0, w, h);
+      ctx.font = `${size - 3}px ui-monospace, "Cascadia Code", Consolas, monospace`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+
+      for (const s of streams) {
+        s.y += s.speed * dt;
+        if (s.y - s.len * size > h) Object.assign(s, makeStream(s.x, false));
+
+        for (let k = 0; k < s.len; k++) {
+          const y = s.y - k * size;
+          if (y < -size || y > h + size) continue;
+          if (Math.random() < 0.02) s.chars[k] = pick();
+
+          const fade = 1 - k / s.len;
+          const dx = s.x - mouse.x, dy = y - mouse.y;
+          const near = Math.max(0, 1 - Math.hypot(dx, dy) / 130);
+
+          if (near > 0) {
+            ctx.fillStyle = `rgba(${PINK},${Math.min(0.9, 0.25 + near * 0.7)})`;
+          } else if (k === 0) {
+            ctx.fillStyle = `rgba(${PINE},0.5)`;
+          } else {
+            ctx.fillStyle = `rgba(${MOSS},${fade * 0.32})`;
+          }
+          ctx.fillText(s.chars[k], s.x, y);
+        }
       }
+    };
+
+    const loop = (now) => {
+      const dt = Math.min(0.05, (now - last) / 1000 || 0.016);
+      last = now;
+      draw(dt);
       raf = requestAnimationFrame(loop);
     };
-    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) loop();
-    return () => { cancelAnimationFrame(raf); removeEventListener("resize", rs); removeEventListener("pointermove", mv); };
+
+    const start = () => {
+      cancelAnimationFrame(raf);
+      last = performance.now();
+      raf = requestAnimationFrame(loop);
+    };
+
+    const onMove = (e) => { mouse.x = e.clientX; mouse.y = e.clientY; };
+    const onLeave = () => { mouse.x = -9999; mouse.y = -9999; };
+    const onVisibility = () => (document.hidden ? cancelAnimationFrame(raf) : start());
+    let lastW = window.innerWidth;
+    const onResize = () => {
+      if (window.innerWidth === lastW) return; // abaikan perubahan tinggi saat scroll di HP
+      lastW = window.innerWidth;
+      build();
+    };
+
+    build();
+    if (reduce) draw(0);
+    else start();
+
+    window.addEventListener("pointermove", onMove, { passive: true });
+    window.addEventListener("pointerleave", onLeave);
+    window.addEventListener("resize", onResize);
+    document.addEventListener("visibilitychange", onVisibility);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerleave", onLeave);
+      window.removeEventListener("resize", onResize);
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
   }, []);
-  return <canvas ref={ref} className="net" aria-hidden="true" />;
+
+  return <canvas ref={ref} className="net" aria-hidden="true" style={{ width: "100%", height: "100%" }} />;
 }
