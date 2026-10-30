@@ -64,10 +64,12 @@ p { margin: 0 0 0.9rem; } a { color: inherit; text-decoration: none; }
 @keyframes scroll { to { transform: translateX(-50%); } }
 
 .sec { padding-top: 3.2rem; scroll-margin-top: 0.5rem; }
-.sec-title { display: flex; align-items: baseline; gap: 0.7rem; font-size: clamp(1.7rem, 6vw, 2.3rem); font-weight: 800; margin-bottom: 1.2rem; letter-spacing: -0.02em; }
+.sec-title { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; text-align: center; font-size: clamp(2.3rem, 8vw, 3.5rem); font-weight: 800; margin-bottom: 2rem; letter-spacing: -0.02em; }
 .sec-title i { font: 600 0.9rem var(--mono); color: var(--moss); font-style: normal; }
-.sec-title span { background: linear-gradient(transparent 62%, var(--butter) 62%); padding: 0 0.15em; }
-.lead { max-width: 36rem; color: var(--muted); }
+.sec-title .tt { display: inline-flex; align-items: center; justify-content: center; gap: 0.7rem; flex-wrap: wrap; }
+.sec-title .ti { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 18px; background: var(--pine); color: #fff; box-shadow: var(--shadow); animation: float 5s ease-in-out infinite; }
+.sec-title .w { background: linear-gradient(transparent 62%, var(--butter) 62%); padding: 0 0.15em; }
+.lead { max-width: 36rem; margin-left: auto; margin-right: auto; text-align: center; color: var(--muted); }
 .two-col { display: grid; gap: 1.5rem; }
 
 .card, .b { position: relative; overflow: hidden; background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 1.3rem; box-shadow: var(--shadow); transition: transform 0.3s, box-shadow 0.3s; }
@@ -120,7 +122,7 @@ p { margin: 0 0 0.9rem; } a { color: inherit; text-decoration: none; }
 .chips img { width: 14px; height: 14px; }
 .cover { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 16px; display: block; margin-bottom: 0.9rem; transition: transform 0.4s; }
 .card:hover .cover { transform: scale(1.03); }
-.team { aspect-ratio: 4 / 3; object-position: center 30%; margin: 1rem 0 0.2rem; }
+.team { aspect-ratio: 4 / 3; object-position: center 75%; margin: 1rem 0 0.2rem; }
 .cert .cover { aspect-ratio: 4 / 3; object-fit: contain; background: #fff; border: 1px solid var(--line); }
 .links { display: flex; gap: 1rem; margin-top: 0.9rem; font-weight: 700; }
 .links a { display: inline-flex; align-items: center; gap: 0.2rem; border-bottom: 2px solid var(--butter); }

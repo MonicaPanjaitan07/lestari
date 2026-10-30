@@ -1,13 +1,25 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Menu, X, MessageCircle, Music2, Pause, ArrowDown, ArrowUp, ArrowUpRight, Github, Instagram, Linkedin, FileText, Download, Database, Cpu, Palette, Sparkles, Code2 } from "lucide-react";
+import { Menu, X, MessageCircle, Music2, Pause, ArrowDown, ArrowUp, ArrowUpRight, Github, Instagram, Linkedin, FileText, Download, Database, Cpu, Palette, Sparkles, Code2, User, GraduationCap, Wrench, Laptop, Award, Mail } from "lucide-react";
 import Network from "./Network";
 import { ui, site, TECH, navLinks, facts, about, education, skills, projects, certs, contacts } from "./data";
 
 const dev = (p) => `https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/${p}.svg`;
 const LU = { Databases: Database, "Data Engineering (bootcamp)": Cpu, "UI/UX Design": Palette, Prototyping: Sparkles };
 const GI = { Data: Database, Design: Palette, Web: Code2 };
+
+function Title({ t, k, n, Icon }) {
+  return (
+    <h2 className="sec-title rv">
+      <i>{`0${n} /`}</i>
+      <span className="tt">
+        <span className="ti"><Icon size={26} /></span>
+        <span className="w">{t(ui[k])}</span>
+      </span>
+    </h2>
+  );
+}
 
 function Ico({ name, size = 20 }) {
   if (TECH[name]) return <img src={dev(TECH[name])} alt="" width={size} height={size} loading="lazy" />;
@@ -113,7 +125,6 @@ export default function Portfolio() {
   const play = async () => { try { await audio.current.play(); setPlaying(true); } catch { setPlaying(false); } };
   const toggle = () => (playing ? (audio.current.pause(), setPlaying(false)) : play());
   const explore = () => { if (!playing) play(); document.getElementById("about")?.scrollIntoView({ behavior: "smooth" }); };
-  const Title = ({ k, n }) => <h2 className="sec-title rv"><i>{`0${n} /`}</i><span>{t(ui[k])}</span></h2>;
   const marquee = Object.keys(TECH);
 
   return (
@@ -170,7 +181,7 @@ export default function Portfolio() {
       </div>
 
       <section id="about" className="wrap sec">
-        <Title k="aboutT" n={1} />
+        <Title t={t} k="aboutT" n={1} Icon={User} />
         <div className="bento">
           <div className="b photo rv">
             <div className={`pic ${site.collage ? "collage" : ""}`}><img src={site.photo} alt={site.name} /></div>
@@ -198,7 +209,7 @@ export default function Portfolio() {
       </section>
 
       <section id="education" className="wrap sec">
-        <Title k="eduT" n={2} />
+        <Title t={t} k="eduT" n={2} Icon={GraduationCap} />
         <div className="timeline">{education.map((e) => (
           <div key={e.school} className="tl">
             <div className="card edu rv">
@@ -214,7 +225,7 @@ export default function Portfolio() {
       </section>
 
       <section id="skills" className="wrap sec">
-        <Title k="skillsT" n={3} />
+        <Title t={t} k="skillsT" n={3} Icon={Wrench} />
         <div className="grid">{skills.map(([g, items]) => {
           const GIc = GI[g.en];
           return (
@@ -227,7 +238,7 @@ export default function Portfolio() {
       </section>
 
       <section id="projects" className="wrap sec">
-        <Title k="projectsT" n={4} />
+        <Title t={t} k="projectsT" n={4} Icon={Laptop} />
         <div className="grid two">{projects.map((p) => (
           <article key={p.title} className="card proj rv">
             <img className="cover" src={p.cover} alt={p.title} loading="lazy" />
@@ -244,7 +255,7 @@ export default function Portfolio() {
       </section>
 
       <section id="certs" className="wrap sec">
-        <Title k="certsT" n={5} />
+        <Title t={t} k="certsT" n={5} Icon={Award} />
         <p className="lead rv">{t(ui.tapZoom)}</p>
         <div className="grid">{certs.map((c) => (
           <a key={c.img} className="card cert rv" href={c.img} {...ext}>
@@ -255,7 +266,7 @@ export default function Portfolio() {
       </section>
 
       <section id="contact" className="wrap sec">
-        <Title k="contactT" n={6} />
+        <Title t={t} k="contactT" n={6} Icon={Mail} />
         <p className="lead rv">{t(ui.contactLead)}</p>
         <div className="two-col">
           <div className="grid two">{contacts.map(([l, v, h]) => (
