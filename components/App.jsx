@@ -81,9 +81,7 @@ export default function App({ children }) {
       {children}
       <footer>© 2026 {site.name}. {t(ui.rights)}</footer>
       <a className="fab" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><MessageCircle size={24} /></a>
-      <div style={{ position: "fixed", bottom: 16, left: 16, width: 320, zIndex: 50 }}>
-        <SpotifyPlayer />
-      </div>
+      <SpotifyPlayer />
     </Ctx.Provider>
   );
 }
