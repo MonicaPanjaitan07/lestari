@@ -581,3 +581,43 @@ main.swap-in .page { animation: unblur .4s var(--out); }
 .fab-music { left: auto; right: 18px; bottom: calc(80px + env(safe-area-inset-bottom)); }
 .fab-music::after { content: attr(data-label); position: absolute; right: calc(100% + 10px); top: 50%; transform: translateY(-50%); white-space: nowrap; font-size: .75rem; font-weight: 600; padding: .3rem .6rem; border-radius: 8px; background: var(--fg); color: var(--bg); opacity: 0; pointer-events: none; transition: opacity .2s; }
 .fab-music:hover::after { opacity: 1; }
+
+/* Nama lengkap di header HP */
+.mb-id { min-width: 0; flex: 1; }
+.mb-id img { flex: none; }
+.mb-name { font-size: clamp(.82rem, 3.9vw, 1rem); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: -.01em; }
+.mobile-bar { gap: .6rem; }
+.icon-btn { flex: none; }
+/* Menu HP: tampilkan profil (foto, nama, status) */
+.drawer .profile { display: grid; }
+.drawer .avatar { width: 5rem; height: 5rem; }
+.drawer .profile .who { font-size: 1.05rem; white-space: normal; }
+
+/* Ikon bergerak di samping sapaan "Hi, I'm Monica" */
+.hero-top h1.hi { display: inline-flex; align-items: center; flex-wrap: wrap; gap: .1em; }
+.hi .name-icon { width: 1.15em; height: 1.15em; margin-left: .3em; vertical-align: middle; box-shadow: 0 0 0 3px var(--card), 0 0 0 4px var(--line); }
+.hi:hover .name-icon { transform: scale(1.1) rotate(-6deg); }
+
+/* Hak cipta di paling bawah sidebar */
+@media (min-width: 1024px) {
+  .sidebar { display: flex; flex-direction: column; }
+  .sidebar > hr:last-of-type { display: none; }
+  .sidebar .side-foot { margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--line); }
+}
+
+/* ───────── Status (dipercantik) ───────── */
+.status {
+  position: relative; display: inline-flex; align-items: center; gap: .55rem; margin-top: .55rem;
+  padding: .38rem .95rem .38rem .75rem; border-radius: 999px; font-weight: 600; letter-spacing: .005em;
+  color: color-mix(in srgb, var(--ok) 55%, var(--fg));
+  background: linear-gradient(135deg, color-mix(in srgb, var(--ok) 12%, var(--card)), color-mix(in srgb, var(--ok) 4%, var(--card)));
+  border: 1px solid color-mix(in srgb, var(--ok) 28%, var(--line));
+  box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 4px 14px -8px color-mix(in srgb, var(--ok) 60%, transparent);
+}
+.status i { width: 8px; height: 8px; background: var(--ok); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ok) 22%, transparent); }
+.status i::after { background: var(--ok); }
+.rot { overflow: hidden; transition: width .45s cubic-bezier(.4,0,.2,1); }
+.rot > span { text-align: left; transform: translateY(6px); filter: blur(2px); transition: opacity .45s ease, transform .45s ease, filter .45s ease; }
+.rot > span.on { transform: none; filter: none; }
+[data-theme="dark"] .status { box-shadow: 0 4px 14px -8px color-mix(in srgb, var(--ok) 60%, transparent); }
+.rot > span { justify-self: start; width: max-content; }

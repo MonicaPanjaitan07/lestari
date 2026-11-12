@@ -89,7 +89,7 @@ function HomePage({ T, L, go, openCert }) {
     <>
       <section className="hero">
         <div className="hero-top rv" style={{ "--i": 0 }}>
-          <h1>{T.hi}</h1>
+          <h1 className="hi">{T.hi}<NameIcon /></h1>
           {site.cv && <a className="btn" href={site.cv} download><FileDown size={15} /> CV</a>}
         </div>
         <ul className="hero-meta rv" style={{ "--i": 1 }}>
@@ -434,16 +434,23 @@ function ContactPage({ T }) {
 // Status yang berganti otomatis (fade out → fade in tiap ±2,8 detik).
 function RotatingStatus({ items }) {
   const [i, setI] = useState(0);
+  const [w, setW] = useState(null);
+  const box = useRef(null);
   useEffect(() => {
     setI(0);
     if (items.length < 2 || reduced()) return;
     const id = setInterval(() => setI((n) => (n + 1) % items.length), 2800);
     return () => clearInterval(id);
   }, [items]);
+  // Lebar kotak menyesuaikan panjang teks yang sedang tampil (berubah halus)
+  useEffect(() => {
+    const el = box.current?.querySelector(".rot > span.on");
+    if (el) setW(el.scrollWidth);
+  }, [i, items]);
   return (
-    <span className="status" role="status" aria-live="polite">
+    <span className="status" role="status" aria-live="polite" ref={box}>
       <i aria-hidden="true" />
-      <span className="rot">
+      <span className="rot" style={w ? { width: w } : undefined}>
         {items.map((t, k) => <span key={k} className={k === i ? "on" : ""} aria-hidden={k !== i}>{t}</span>)}
       </span>
     </span>
@@ -665,7 +672,7 @@ export default function Portfolio() {
       <button className="avatar" onClick={() => setPhoto(true)} aria-label={site.name}>
         <img src={site.avatar} alt={site.name} />
       </button>
-      <h2 className="who">{site.name}<NameIcon /></h2>
+      <h2 className="who">{site.name}</h2>
       <p className="handle">{site.handle}</p>
       <RotatingStatus items={site.statuses[lang]} />
     </div>
@@ -680,8 +687,7 @@ export default function Portfolio() {
       <header className="mobile-bar">
         <a href="#" className="mb-id" onClick={(e) => go("home", e)}>
           <img src={site.avatar} alt="" />
-          <span>{site.name.split(" ").slice(0, 2).join(" ")}</span>
-          <NameIcon small />
+          <span className="mb-name">{site.name}</span>
         </a>
         <button className="icon-btn" onClick={() => setDrawer((d) => !d)} aria-label={T.menu} aria-expanded={drawer}>
           {drawer ? <X size={20} /> : <Menu size={20} />}
@@ -713,7 +719,7 @@ export default function Portfolio() {
               <div className="tb-id">
                 <button className="avatar sm" onClick={() => setPhoto(true)} aria-label={site.name}><img src={site.avatar} alt={site.name} /></button>
                 <div>
-                  <p className="who">{site.name}<NameIcon small /></p>
+                  <p className="who">{site.name}</p>
                   <p className="handle">{site.handle}</p>
                 </div>
                 <RotatingStatus items={site.statuses[lang]} />
