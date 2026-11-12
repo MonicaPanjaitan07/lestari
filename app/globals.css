@@ -621,3 +621,6 @@ main.swap-in .page { animation: unblur .4s var(--out); }
 .rot > span.on { transform: none; filter: none; }
 [data-theme="dark"] .status { box-shadow: 0 4px 14px -8px color-mix(in srgb, var(--ok) 60%, transparent); }
 .rot > span { justify-self: start; width: max-content; }
+
+/* Ikon keahlian tanpa logo resmi */
+.skill-ic { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; flex: none; color: var(--sc); background: color-mix(in srgb, var(--sc) 14%, #fff); box-shadow: 0 0 0 1px var(--line); }

@@ -251,7 +251,7 @@ export const achievementTypes = {
   mini: { id: "Mini course", en: "Mini course" },
 };
 
-// Sesuai CV. icon: nama ikon dari devicon.dev (kosongkan kalau tidak ada)
+// Sesuai CV. icon: nama ikon dari devicon.dev. Kalau tidak ada, pakai lucide (nama ikon lucide.dev) + color.
 export const skillGroups = {
   web: "Web Development", data: { id: "Data & Database", en: "Data & Databases" }, design: "Design", tools: "Tools",
   soft: { id: "Soft skill", en: "Soft skills" },
@@ -264,16 +264,16 @@ export const skills = [
   { name: "JavaScript", group: "web", icon: "javascript/javascript-original" },
   { name: "Next.js", group: "web", icon: "nextjs/nextjs-original" },
   { name: "MySQL", group: "data", icon: "mysql/mysql-original" },
-  { name: "Database Design", group: "data", icon: "" },
-  { name: { id: "Dasar Data Engineering", en: "Data Engineering fundamentals" }, group: "data", icon: "" },
-  { name: "UI/UX Design", group: "design", icon: "" },
-  { name: "Prototyping", group: "design", icon: "" },
+  { name: "Database Design", group: "data", icon: "", lucide: "Database", color: "#0ea5e9" },
+  { name: { id: "Dasar Data Engineering", en: "Data Engineering fundamentals" }, group: "data", icon: "", lucide: "Workflow", color: "#f59e0b" },
+  { name: "UI/UX Design", group: "design", icon: "", lucide: "PenTool", color: "#ec4899" },
+  { name: "Prototyping", group: "design", icon: "", lucide: "MousePointerClick", color: "#8b5cf6" },
   { name: "Figma", group: "design", icon: "figma/figma-original" },
   { name: "Git", group: "tools", icon: "git/git-original" },
   { name: "GitHub", group: "tools", icon: "github/github-original" },
   { name: "Visual Studio Code", group: "tools", icon: "vscode/vscode-original" },
-  { name: { id: "Komunikasi", en: "Communication" }, group: "soft", icon: "" },
-  { name: { id: "Kerja tim", en: "Teamwork" }, group: "soft", icon: "" },
+  { name: { id: "Komunikasi", en: "Communication" }, group: "soft", icon: "", lucide: "MessagesSquare", color: "#10b981" },
+  { name: { id: "Kerja tim", en: "Teamwork" }, group: "soft", icon: "", lucide: "Users", color: "#6366f1" },
 ];
 export const interests = [
   { id: "Analisis Data", en: "Data Analysis" }, "Machine Learning", "Cyber Security", "Cloud (AWS)",
