@@ -15,7 +15,7 @@ import {
   skillGroups, skills, interests, projects,
 } from "./data";
 
-const PAGES = ["home", "about", "achievements", "projects", "dashboard", "contact"];
+const PAGES = ["home", "about", "dashboard", "achievements", "projects", "contact"];
 const NAV_ICON = { home: Home, about: User, achievements: Award, projects: FolderGit2, dashboard: LayoutGrid, contact: Mail };
 const THEMES = [["light", Sun], ["dark", Moon], ["nature", Leaf]];
 const SOCIAL_ICON = { email: Mail, whatsapp: WhatsAppIcon, linkedin: Linkedin, github: Github, instagram: Instagram, tiktok: TikTokIcon };
