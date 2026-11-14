@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { flushSync } from "react-dom";
+import { flushSync, createPortal } from "react-dom";
 import {
   Home, User, Award, FolderGit2, Mail, Sun, Moon, Leaf, Menu, X, MapPin, GraduationCap, Briefcase,
-  Search, ArrowUpRight, ArrowRight, FileDown, Music2, Pause, Copy, Check, Code2, Send,
+  Search, ArrowUpRight, ArrowRight, FileDown, Music2, Pause, Copy, Check, Code2, Send, Globe,
   Instagram, Linkedin, Github, LayoutGrid, PanelLeft, PanelTop, Trophy, Layers, Languages, Sparkles, BookOpen,
-  Database, Workflow, PenTool, MousePointerClick, MessagesSquare, Users,
+  Database, Workflow, PenTool, MousePointerClick, MessagesSquare, Users, Bot, Regex,
 } from "lucide-react";
 import { burst } from "./ClickBurst";
 import Dashboard from "./Dashboard";
@@ -20,7 +20,7 @@ const PAGES = ["home", "about", "dashboard", "achievements", "projects", "contac
 const NAV_ICON = { home: Home, about: User, achievements: Award, projects: FolderGit2, dashboard: LayoutGrid, contact: Mail };
 const THEMES = [["light", Sun], ["dark", Moon], ["nature", Leaf]];
 const SOCIAL_ICON = { email: Mail, whatsapp: WhatsAppIcon, linkedin: Linkedin, github: Github, instagram: Instagram, tiktok: TikTokIcon };
-const SKILL_ICON = { Database, Workflow, PenTool, MousePointerClick, MessagesSquare, Users };
+const SKILL_ICON = { Database, Workflow, PenTool, MousePointerClick, MessagesSquare, Users, Bot, Sparkles, Regex };
 const DEVICON = "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/";
 const ext = { target: "_blank", rel: "noopener noreferrer" };
 
@@ -288,7 +288,7 @@ function ProjectModal({ p, T, L, onClose }) {
           </div>
           {(p.demo || p.repo) && (
             <div className="pm-links">
-              {p.demo && <a className="btn solid small" href={p.demo} {...ext}>{T.demo} <ArrowUpRight size={14} /></a>}
+              {p.demo && <a className="btn solid small" href={p.demo} {...ext}><Globe size={14} /> {T.visit} <ArrowUpRight size={14} /></a>}
               {p.repo && <a className="btn small" href={p.repo} {...ext}><Github size={14} /> {T.code} <ArrowUpRight size={14} /></a>}
             </div>
           )}
@@ -318,7 +318,7 @@ function ProjectModal({ p, T, L, onClose }) {
                   </div>
                 )}
                 {webs.length > 0 && <div className={`pm-webs${webs.length > 1 ? " multi" : ""}`}>{webs.map((x, i) => (
-                  <figure key={i} className="pm-web" style={{ "--k": i }}>
+                  <figure key={i} className={`pm-web${x.wide ? " wide" : ""}`} style={{ "--k": i }}>
                     <button onClick={() => setZoom(x)} aria-label={L(x.caption)}><img src={x.src} alt={L(x.caption)} loading="lazy" /></button>
                     <figcaption>{L(x.caption)}</figcaption>
                   </figure>
@@ -372,15 +372,15 @@ function ProjectsPage({ T, L }) {
               <p>{L(p.short)}</p>
               <div className="tags">{p.stack.map((s) => <span key={s} className="tag">{s}</span>)}</div>
               <div className="proj-links">
-                <button className="link-btn" onClick={() => setOpen(p)}>{T.details} <ArrowRight size={14} /></button>
-                {p.repo && <a href={p.repo} {...ext}><Github size={14} /> {T.code} <ArrowUpRight size={14} /></a>}
-                {p.demo && <a href={p.demo} {...ext}>{T.demo} <ArrowUpRight size={14} /></a>}
+                <button className="btn solid small" onClick={() => setOpen(p)}>{T.details}</button>
+                {p.demo && <a className="btn small" href={p.demo} {...ext}><Globe size={14} /> {T.visit}</a>}
+                {p.repo && <a className="btn small" href={p.repo} {...ext}><Github size={14} /> {T.code}</a>}
               </div>
             </div>
           </article>
         ))}
       </div>
-      {open && <ProjectModal p={open} T={T} L={L} onClose={() => setOpen(null)} />}
+      {open && typeof document !== "undefined" && createPortal(<ProjectModal p={open} T={T} L={L} onClose={() => setOpen(null)} />, document.body)}
     </>
   );
 }

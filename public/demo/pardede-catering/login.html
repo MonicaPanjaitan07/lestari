@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="en"><head><script>(function(){var M='Ini versi demo (statis) dari website admin Pardede Catering. Data tidak bisa disimpan.';
+var P='/demo/pardede-catering';function go(f){var a=(f.getAttribute('action')||'');if(/\/login(\?|$)/.test(a)||f.querySelector('input[name=password]')&&f.querySelector('input[name=email]')&&/login/.test(location.pathname)){location.href=P+'/admin/dashboard.html';return}
+if(/logout/.test(a)){location.href=P+'/login.html';return}alert(M)}
+document.addEventListener('submit',function(e){e.preventDefault();e.stopImmediatePropagation();go(e.target)},true);
+HTMLFormElement.prototype.submit=function(){go(this)};HTMLFormElement.prototype.requestSubmit=function(){go(this)};
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href="#demo"]');if(a){e.preventDefault();alert(M)}},true);
+var of=window.fetch;window.fetch=function(u,o){if(typeof u==='string'&&u.indexOf('/admin/')===0)return Promise.resolve(new Response('[]',{headers:{'Content-Type':'application/json'}}));return of.apply(this,arguments)};})();</script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+
+    <title>Pardede Catering - Admin</title>
+    <link rel="icon" type="image/png" href="/demo/pardede-catering/assets/img/catering_pardede_logo.png">
+    <!-- Essential Libraries (CDN for Robustness) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&amp;family=Dancing+Script:wght@600;700&amp;display=swap" rel="stylesheet">
+
+    <!-- Aura-Crimson Standalone Design System (Redesigned Light Theme) -->
+    <link href="/demo/pardede-catering/css/crimson-white.css" rel="stylesheet">
+
+    
+    <link rel="preload" as="style" href="/demo/pardede-catering/build/assets/app.css"><link rel="modulepreload" as="script" href="/demo/pardede-catering/build/assets/app.js"><link rel="stylesheet" href="/demo/pardede-catering/build/assets/app.css"><script type="module" src="/demo/pardede-catering/build/assets/app.js"></script>
+
+</head>
+
+<body class="login-page">
+
+    <div class="aura-auth-page">
+            <div class="auth-card">
+        <div class="text-center mb-5">
+            <div class="auth-logo-glow mb-4">
+                <i class="fas fa-shield-halved text-danger fs-1"></i>
+            </div>
+            <h2 class="text-white font-weight-bold mb-1">Login</h2>
+            <p class="text-muted small uppercase letter-spacing-1">Welcome</p>
+        </div>
+
+        <form class="form" method="POST" action="/demo/pardede-catering/login.html">
+            <input type="hidden" name="_token" value="oxDBzOYe4SE4iX4IuG8GjHDVrDpgZvs7zVQoJSUY" autocomplete="off">
+            
+            <div class="form-group mb-4 focused">
+                <label class="text-muted small font-weight-bold mb-2 d-block">EMAIL</label>
+                <input type="email" name="email" class="form-control-aura " placeholder="Enter entity email..." value="" autofocus="">
+                            </div>
+
+            <div class="form-group mb-5">
+                <label class="text-muted small font-weight-bold mb-2 d-block">PASSWORD</label>
+                <input type="password" name="password" class="form-control-aura  mb-1" placeholder="••••••••">
+                            </div>
+
+            <button type="submit" class="btn btn-aura">
+                Login
+            </button>
+        </form>
+
+    </div>
+    </div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- ApexCharts -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+<!-- Aura-Crimson Core JS -->
+<script src="/demo/pardede-catering/js/aura-crimson.js"></script>
+
+
+
+
+
+
+</body></html>

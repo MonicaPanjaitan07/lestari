@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script>(function(){var M='Ini versi demo (statis) dari website admin Pardede Catering. Data tidak bisa disimpan.';
+var P='/demo/pardede-catering';function go(f){var a=(f.getAttribute('action')||'');if(/\/login(\?|$)/.test(a)||f.querySelector('input[name=password]')&&f.querySelector('input[name=email]')&&/login/.test(location.pathname)){location.href=P+'/admin/dashboard.html';return}
+if(/logout/.test(a)){location.href=P+'/login.html';return}alert(M)}
+document.addEventListener('submit',function(e){e.preventDefault();e.stopImmediatePropagation();go(e.target)},true);
+HTMLFormElement.prototype.submit=function(){go(this)};HTMLFormElement.prototype.requestSubmit=function(){go(this)};
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href="#demo"]');if(a){e.preventDefault();alert(M)}},true);
+var of=window.fetch;window.fetch=function(u,o){if(typeof u==='string'&&u.indexOf('/admin/')===0)return Promise.resolve(new Response('[]',{headers:{'Content-Type':'application/json'}}));return of.apply(this,arguments)};})();</script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+
+    <title>Pardede Catering - Admin</title>
+    <link rel="icon" type="image/png" href="/demo/pardede-catering/assets/img/catering_pardede_logo.png">
+    <!-- Essential Libraries (CDN for Robustness) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- Aura-Crimson Standalone Design System (Redesigned Light Theme) -->
+    <link href="/demo/pardede-catering/css/crimson-white.css" rel="stylesheet"/>
+
+            <meta name="user-id" content="1">
+    
+    <link rel="preload" as="style" href="/demo/pardede-catering/build/assets/app.css" /><link rel="modulepreload" as="script" href="/demo/pardede-catering/build/assets/app.js" /><link rel="stylesheet" href="/demo/pardede-catering/build/assets/app.css" /><script type="module" src="/demo/pardede-catering/build/assets/app.js"></script>
+
+</head>
+
+<body class="">
+
+    <div class="aura-app">
+        <nav class="aura-sidebar">
+    <div class="sidebar-header">
+        <h1 class="sidebar-logo">Pardede Catering</h1>
+    </div>
+
+    <ul class="sidebar-nav">
+        
+        <li class="nav-item ">
+            <a href="/demo/pardede-catering/admin/dashboard.html" class="nav-link">
+                <i class="fas fa-rocket"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+
+        
+        <li class="nav-item ">
+            <a href="/demo/pardede-catering/admin/menus.html" class="nav-link">
+                <i class="fas fa-utensils"></i>
+                <span>Daftar Menu</span>
+            </a>
+        </li>
+
+        
+        <li class="nav-item ">
+            <a href="/demo/pardede-catering/admin/orders.html" class="nav-link">
+                <i class="fas fa-box-open"></i>
+                <span>Pesanan</span>
+                                    <span class="badge-dot animate-pulse-crimson"></span>
+                            </a>
+        </li>
+
+        
+        <li class="nav-item ">
+            <a href="/demo/pardede-catering/admin/messages.html" class="nav-link">
+                <i class="fas fa-comments"></i>
+                <span>Pesan</span>
+                            </a>
+        </li>
+
+        
+        <li class="nav-item ">
+            <a href="/demo/pardede-catering/admin/additions.html" class="nav-link">
+                <i class="fas fa-plus-circle"></i>
+                <span>Tambahan</span>
+                            </a>
+        </li>
+
+        
+        <li class="nav-item ">
+            <a href="/demo/pardede-catering/admin/payments.html" class="nav-link">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>Pembayaran</span>
+            </a>
+        </li>
+
+        
+        <li class="nav-item ">
+            <a href="/demo/pardede-catering/admin/logistics.html" class="nav-link">
+                <i class="fas fa-map-location-dot"></i>
+                <span>Lokasi Pesanan</span>
+            </a>
+        </li>
+
+        
+        <li class="nav-item ">
+            <a href="/demo/pardede-catering/admin/drivers.html" class="nav-link">
+                <i class="fas fa-id-card"></i>
+                <span>Daftar Sopir</span>
+            </a>
+        </li>
+
+        
+        <li class="nav-item active">
+            <a href="/demo/pardede-catering/admin/categories.html" class="nav-link">
+                <i class="fas fa-tags"></i>
+                <span>Kategori</span>
+            </a>
+        </li>
+
+        
+        <li class="nav-item ">
+            <a href="/demo/pardede-catering/admin/galleries.html" class="nav-link">
+                <i class="fas fa-camera-retro"></i>
+                <span>Galeri</span>
+            </a>
+        </li>
+
+        <li class="nav-item ">
+            <a class="nav-link" href="/demo/pardede-catering/admin/reviews.html">
+                <i class="fas fa-star"></i>
+                <span>Ulasan</span>
+            </a>
+        </li>
+    </ul>
+
+
+</nav>
+        <main class="aura-main-panel">
+            <header class="aura-navbar d-flex align-items-center justify-content-between">
+                <div class="nav-brand-group d-flex align-items-center">
+                    <button class="btn aura-menu-toggle d-lg-none me-3">
+                        <i class="fas fa-bars text-white"></i>
+                    </button>
+                    <h5 class="m-0 text-white font-weight-bold">Kategori</h5>
+                </div>
+
+                <div class="nav-utils d-flex align-items-center">
+                    <div class="aura-nav-utils d-flex align-items-center">
+    
+    <div class="dropdown me-4">
+        <a href="#" class="op-8 position-relative" data-bs-toggle="dropdown" id="notificationBellLink">
+            <i class="fas fa-bell fs-5 text-aura-crimson"></i>
+                    </a>
+        <div class="dropdown-menu dropdown-menu-end border-0 p-0 mt-3 shadow-sm rounded-4" style="width: 380px;">
+            <div class="p-4 border-bottom d-flex justify-content-between align-items-center bg-light rounded-top-4">
+                <div>
+                    <h6 class="mb-0 fw-bold text-dark">Notifikasi</h6>
+                    <p class="smaller text-muted mb-0">Tetap terupdate dengan aktivitas katering Anda</p>
+                </div>
+                <span class="badge bg-danger-light text-danger rounded-pill px-3 py-2" id="notificationCountBadge">0 Baru</span>
+            </div>
+            <div class="aura-notification-list" style="max-height: 420px; overflow-y: auto; overflow-x: hidden;" id="notificationList">
+                                                    <div class="p-5 text-center" id="emptyNotificationMessage">
+                        <div class="opacity-50 mb-3">
+                            <i class="far fa-bell-slash fs-1 text-muted"></i>
+                        </div>
+                        <p class="small text-muted mb-0">Belum ada pemberitahuan</p>
+                    </div>
+                            </div>
+            <div class="p-3 bg-light rounded-bottom-4">
+                <a href="/demo/pardede-catering/admin/notifications.html" class="btn btn-outline-danger btn-sm w-100 fw-bold py-2 rounded-pill">LIHAT SEMUA NOTIFIKASI</a>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="dropdown">
+        <a href="#" class="d-flex align-items-center text-decoration-none" data-bs-toggle="dropdown">
+            <div class="aura-avatar me-2">
+                                    <img src="https://ui-avatars.com/api/?name=Admin+Pardede&background=EB4D4B&color=fff" alt="User" class="rounded-circle border border-danger" width="40" height="40">
+                            </div>
+            <i class="fas fa-chevron-down text-muted small"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end p-2 mt-3 shadow-lg" style="min-width: 200px;">
+            <li>
+                <a href="/demo/pardede-catering/admin/profile.html" class="dropdown-item py-2 px-3 rounded-3 mb-1 text-secondary">
+                    <i class="fas fa-user-gear text-danger me-2"></i> Pengaturan Profil
+                </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a href="#" class="dropdown-item py-2 px-3 rounded-3 text-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="fas fa-power-off me-2"></i> Keluar
+                </a>
+            </li>
+        </ul>
+        <form id="logout-form" action="/demo/pardede-catering/logout" method="POST" style="display: none;">
+            <input type="hidden" name="_token" value="D7CRkbWZxVFizyJA03iTWsdQ9b3TdJOZxFFxZgPH" autocomplete="off">        </form>
+    </div>
+</div>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const userIdMeta = document.querySelector('meta[name="user-id"]');
+        if (!userIdMeta) return;
+        const userId = userIdMeta.getAttribute('content');
+        if (!userId) return;
+
+        const initEcho = () => {
+            if (typeof window.Echo === 'undefined') {
+                console.warn('Echo is not initialized yet. Retrying...');
+                setTimeout(initEcho, 500);
+                return;
+            }
+
+            console.log('Subscribing to notification channel for user ' + userId);
+            window.Echo.private(`App.Models.User.${userId}`)
+                .listen('.notification.sent', (e) => {
+                    console.log('Real-time notification received:', e);
+                    
+                    // 1. Show SweetAlert Toast
+                    if (typeof Swal !== 'undefined') {
+                        Swal.fire({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 5000,
+                            timerProgressBar: true,
+                            icon: e.type === 'new_order' ? 'warning' : 'info',
+                            title: e.title,
+                            text: e.message,
+                            background: '#15151e',
+                            color: '#fff',
+                            iconColor: e.type === 'new_order' ? '#f39c12' : '#ff334b'
+                        });
+                    }
+
+                    // 2. Show/update red dot on the bell icon if it doesn't exist
+                    let bellLink = document.getElementById('notificationBellLink');
+                    if (bellLink) {
+                        let redDot = document.getElementById('notificationRedDot');
+                        if (!redDot) {
+                            redDot = document.createElement('span');
+                            redDot.id = 'notificationRedDot';
+                            redDot.className = 'position-absolute top-0 start-100 translate-middle p-1 bg-aura-crimson border border-dark rounded-circle pulse-red';
+                            redDot.style.width = '10px';
+                            redDot.style.height = '10px';
+                            bellLink.appendChild(redDot);
+                        }
+                    }
+
+                    // 3. Update count badge
+                    let countBadge = document.getElementById('notificationCountBadge');
+                    if (countBadge) {
+                        let currentCountText = countBadge.textContent || '0';
+                        let currentCount = parseInt(currentCountText) || 0;
+                        countBadge.textContent = (currentCount + 1) + ' New';
+                    }
+
+                    // 4. Prepend to list
+                    let listContainer = document.getElementById('notificationList');
+                    if (listContainer) {
+                        // Remove empty notification message if present
+                        let emptyMsg = document.getElementById('emptyNotificationMessage');
+                        if (emptyMsg) {
+                            emptyMsg.remove();
+                        }
+
+                        let url = '#';
+                        if (e.related_id) {
+                            url = '/demo/pardede-catering/admin/orders/:id.html'.replace(':id', e.related_id);
+                        }
+
+                        let iconClass = e.type === 'new_order' ? 'bg-warning-transparent text-warning' : 'bg-aura-crimson-transparent text-aura-crimson';
+                        let iconName = e.type === 'new_order' ? 'fa-shopping-basket' : 'fa-info-circle';
+
+                        let newItemHtml = `
+                            <a href="#" class="dropdown-item px-4 py-3 notification-item unread-item">
+                                <div class="d-flex align-items-center">
+                                    <div class="aura-icon-circle-sm ${iconClass} me-3">
+                                        <i class="fas ${iconName}"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <p class="mb-0 fw-bold small text-white">${e.title}</p>
+                                            <p class="mb-0 smaller text-white-50 op-6">Just now</p>
+                                        </div>
+                                        <p class="mb-0 text-white-50 smaller line-clamp-1">${e.message}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        `;
+                        
+                        listContainer.insertAdjacentHTML('afterbegin', newItemHtml);
+                    }
+                });
+        };
+
+        initEcho();
+    });
+</script>                </div>
+            </header>
+
+            <section class="aura-content">
+                <div class="container-fluid p-0">
+                        <div class="d-flex justify-content-between align-items-center mb-5">
+        <div>
+            <h2 class="m-0 font-weight-bold">Kategori</h2>
+            <p class="text-muted small uppercase letter-spacing-1 mb-0">Kelola grup menu</p>
+        </div>
+        <a href="/demo/pardede-catering/admin/categories/create.html" class="btn btn-primary rounded-pill px-4">
+            <i class="fas fa-layer-group me-2"></i> KATEGORI BARU
+        </a>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card aura-card border-0 shadow-lg">
+                <div class="table-responsive">
+                    <table class="table align-items-center mb-0">
+                        <thead>
+                            <tr>
+                                <th>NAMA KATEGORI</th>
+                                <th class="text-center">AKSI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                                        <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="stat-icon me-3" style="width: 40px; height: 40px; font-size: 1rem;">
+                                            <i class="fas fa-folder-open"></i>
+                                        </div>
+                                        <span class="font-weight-bold text-white fs-6">Nasi Box</span>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <div class="d-flex justify-content-center gap-3">
+                                        <a href="/demo/pardede-catering/admin/categories/1/edit.html" class="btn btn-sm btn-icon btn-secondary rounded-circle">
+                                            <i class="fas fa-terminal"></i>
+                                        </a>
+
+                                        <form action="#demo" method="POST" class="d-inline">
+                                            <input type="hidden" name="_token" value="D7CRkbWZxVFizyJA03iTWsdQ9b3TdJOZxFFxZgPH" autocomplete="off">                                            <input type="hidden" name="_method" value="DELETE">                                            <button type="button" class="btn btn-sm btn-icon btn-outline-danger shadow-sm rounded-circle btn-delete" data-name="Nasi Box">
+                                                <i class="fas fa-trash-can"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="stat-icon me-3" style="width: 40px; height: 40px; font-size: 1rem;">
+                                            <i class="fas fa-folder-open"></i>
+                                        </div>
+                                        <span class="font-weight-bold text-white fs-6">Prasmanan</span>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <div class="d-flex justify-content-center gap-3">
+                                        <a href="/demo/pardede-catering/admin/categories/2/edit.html" class="btn btn-sm btn-icon btn-secondary rounded-circle">
+                                            <i class="fas fa-terminal"></i>
+                                        </a>
+
+                                        <form action="#demo" method="POST" class="d-inline">
+                                            <input type="hidden" name="_token" value="D7CRkbWZxVFizyJA03iTWsdQ9b3TdJOZxFFxZgPH" autocomplete="off">                                            <input type="hidden" name="_method" value="DELETE">                                            <button type="button" class="btn btn-sm btn-icon btn-outline-danger shadow-sm rounded-circle btn-delete" data-name="Prasmanan">
+                                                <i class="fas fa-trash-can"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="stat-icon me-3" style="width: 40px; height: 40px; font-size: 1rem;">
+                                            <i class="fas fa-folder-open"></i>
+                                        </div>
+                                        <span class="font-weight-bold text-white fs-6">Snack Box</span>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <div class="d-flex justify-content-center gap-3">
+                                        <a href="/demo/pardede-catering/admin/categories/3/edit.html" class="btn btn-sm btn-icon btn-secondary rounded-circle">
+                                            <i class="fas fa-terminal"></i>
+                                        </a>
+
+                                        <form action="#demo" method="POST" class="d-inline">
+                                            <input type="hidden" name="_token" value="D7CRkbWZxVFizyJA03iTWsdQ9b3TdJOZxFFxZgPH" autocomplete="off">                                            <input type="hidden" name="_method" value="DELETE">                                            <button type="button" class="btn btn-sm btn-icon btn-outline-danger shadow-sm rounded-circle btn-delete" data-name="Snack Box">
+                                                <i class="fas fa-trash-can"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="stat-icon me-3" style="width: 40px; height: 40px; font-size: 1rem;">
+                                            <i class="fas fa-folder-open"></i>
+                                        </div>
+                                        <span class="font-weight-bold text-white fs-6">Minuman</span>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <div class="d-flex justify-content-center gap-3">
+                                        <a href="#demo" class="btn btn-sm btn-icon btn-secondary rounded-circle">
+                                            <i class="fas fa-terminal"></i>
+                                        </a>
+
+                                        <form action="#demo" method="POST" class="d-inline">
+                                            <input type="hidden" name="_token" value="D7CRkbWZxVFizyJA03iTWsdQ9b3TdJOZxFFxZgPH" autocomplete="off">                                            <input type="hidden" name="_method" value="DELETE">                                            <button type="button" class="btn btn-sm btn-icon btn-outline-danger shadow-sm rounded-circle btn-delete" data-name="Minuman">
+                                                <i class="fas fa-trash-can"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                                                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+                </div>
+            </section>
+
+            <footer class="aura-footer text-center py-4 mt-auto">
+                <p class="text-muted small mb-0">Catering Pardede</p>
+            </footer>
+        </main>
+    </div>
+
+    <form id="logout-form" action="/demo/pardede-catering/logout" method="POST" style="display: none;">
+        <input type="hidden" name="_token" value="D7CRkbWZxVFizyJA03iTWsdQ9b3TdJOZxFFxZgPH" autocomplete="off">    </form>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- ApexCharts -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+<!-- Aura-Crimson Core JS -->
+<script src="/demo/pardede-catering/js/aura-crimson.js"></script>
+
+
+
+
+</body>
+</html>

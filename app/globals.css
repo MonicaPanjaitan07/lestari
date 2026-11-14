@@ -624,3 +624,35 @@ main.swap-in .page { animation: unblur .4s var(--out); }
 
 /* Ikon keahlian tanpa logo resmi */
 .skill-ic { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; flex: none; color: var(--sc); background: color-mix(in srgb, var(--sc) 14%, #fff); box-shadow: 0 0 0 1px var(--line); }
+
+/* 3 proyek: berjejer 3 di layar lebar */
+@media (min-width: 1280px) { .proj-grid { grid-template-columns: repeat(2, 1fr); } }
+.pm-webs .pm-web.wide { grid-column: 1 / -1; }
+
+/* Animasi halaman tidak boleh meninggalkan transform/filter (membuat popup terpotong) */
+.page { animation-fill-mode: backwards !important; }
+.page.leaving { animation-fill-mode: forwards !important; }
+.pmodal { overscroll-behavior: contain; }
+.pmodal .pm-card { margin-bottom: 24px; }
+
+/* Live preview proyek yang sudah online */
+.proj-live { position: absolute; left: 10px; top: 10px; display: inline-flex; align-items: center; gap: .4rem; padding: .25rem .65rem; border-radius: 999px; font-size: .72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; background: rgba(255,255,255,.95); color: #15803d; box-shadow: 0 4px 12px -4px rgba(0,0,0,.3); }
+.proj-live i, .live-dot::before { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,.25); animation: ping-soft 1.6s ease-in-out infinite; }
+.live-dot::before { content: ""; display: inline-block; }
+@keyframes ping-soft { 50% { box-shadow: 0 0 0 6px rgba(34,197,94,0); } }
+.proj-links a.visit { padding: .3rem .7rem; border-radius: 8px; background: var(--accent); color: var(--on-accent); }
+.proj-links a.visit:hover { opacity: .9; }
+.live-dot { display: inline-flex; align-items: center; gap: .35rem; margin-left: .5rem; padding: .12rem .55rem; border-radius: 999px; font-size: .68rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: #15803d; background: rgba(34,197,94,.12); vertical-align: middle; }
+.live-frame { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: #fff; box-shadow: 0 20px 40px -24px rgba(0,0,0,.45); }
+.live-bar { display: flex; align-items: center; gap: .4rem; padding: .55rem .8rem; background: var(--soft); border-bottom: 1px solid var(--line); }
+.live-bar > i { width: 11px; height: 11px; border-radius: 50%; background: #ff5f57; flex: none; }
+.live-bar > i:nth-child(2) { background: #febc2e; } .live-bar > i:nth-child(3) { background: #28c840; }
+.live-url { flex: 1; min-width: 0; margin: 0 .5rem; padding: .3rem .8rem; border-radius: 999px; background: var(--card); border: 1px solid var(--line); font-size: .78rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.live-open { display: inline-flex; align-items: center; gap: .2rem; font-size: .78rem; font-weight: 600; white-space: nowrap; }
+.live-frame iframe { display: block; width: 100%; height: min(70vh, 680px); border: 0; background: #fff; }
+@media (max-width: 640px) { .live-frame iframe { height: 75vh; } .live-open { display: none; } }
+
+/* Tombol kartu proyek: sederhana */
+.proj-links { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .8rem; }
+.proj-links .btn { font-weight: 600; }
+.proj-live { display: none; }
