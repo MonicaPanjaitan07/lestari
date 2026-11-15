@@ -26,8 +26,10 @@ const init = `(function(){try{var d=document.documentElement;d.classList.add('js
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="id" data-theme="light" suppressHydrationWarning>
+    <html lang="id" translate="no" className="notranslate" data-theme="light" suppressHydrationWarning>
       <head>
+        {/* Matikan terjemahan otomatis browser (Chrome/Samsung) — web ini sudah punya tombol ID/EN sendiri */}
+        <meta name="google" content="notranslate" />
         <script dangerouslySetInnerHTML={{ __html: init }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />

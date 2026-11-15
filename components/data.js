@@ -66,7 +66,7 @@ export const ui = {
     languages: "Bahasa", languagesSub: "Bahasa yang aku kuasai.",
     interests: "Minat lain",
     search: "Cari sertifikat...", total: "Total", empty: "Tidak ada yang cocok.",
-    issued: "Diterbitkan", validUntil: "Berlaku sampai", credential: "ID kredensial", openPdf: "Buka PDF",
+    issued: "Diterbitkan", validUntil: "Berlaku sampai", credential: "ID kredensial", openPdf: "Buka PDF", verify: "Verifikasi",
     projSub: "Proyek yang pernah aku kerjakan, sebagian besar bersama tim.",
     details: "Lihat detail", overview: "Tentang proyek", features: "Fitur utama", screens: "Tampilan aplikasi", team: "Anggota kelompok", role: "Peran", demo: "Demo", code: "Kode", visit: "Kunjungi web", live: "Live", livePreview: "Coba langsung", liveSub: "Ini web aslinya yang sedang online — bisa langsung dicoba di sini.", openTab: "Buka di tab baru",
     contactSub: "Yuk terhubung.", findMe: "Temukan aku di",
@@ -111,7 +111,7 @@ export const ui = {
     languages: "Languages", languagesSub: "Languages I speak.",
     interests: "Other interests",
     search: "Search certificates...", total: "Total", empty: "Nothing matches.",
-    issued: "Issued", validUntil: "Valid until", credential: "Credential ID", openPdf: "Open PDF",
+    issued: "Issued", validUntil: "Valid until", credential: "Credential ID", openPdf: "Open PDF", verify: "Verify",
     projSub: "Projects I've worked on, mostly as part of a team.",
     details: "View details", overview: "About the project", features: "Key features", screens: "App screens", team: "Team members", role: "Role", demo: "Demo", code: "Code", visit: "Visit site", live: "Live", livePreview: "Try it live", liveSub: "This is the real, deployed site — you can try it right here.", openTab: "Open in new tab",
     contactSub: "Let's get in touch.", findMe: "Find me on",
@@ -186,6 +186,18 @@ export const experience = [
 // Sertifikat: gambar & PDF di public/certificates
 // kind: "official" = sertifikat resmi, "course" = mini course / bootcamp (tab terpisah)
 export const achievements = [
+  {
+    key: "aws", kind: "official", type: "cert",
+    title: "AWS Certified Cloud Practitioner",
+    issuer: "Amazon Web Services",
+    code: "f6652e6f1b68412cb9afde4c54251fc7",
+    tags: ["AWS", "Cloud"],
+    date: { id: "14 November 2026", en: "November 14, 2026" },
+    valid: { id: "14 November 2029", en: "November 14, 2029" },
+    img: "/certificates/aws.jpg", pdf: "/certificates/aws.pdf",
+    verify: "https://aws.amazon.com/verification",
+    hotspot: [26.5, 72.8, 39, 5.6], // posisi tulisan link di gambar (kiri, atas, lebar, tinggi dalam %)
+  },
   {
     key: "oracle", kind: "official", type: "cert",
     title: "Oracle AI Database Certified Foundations Associate",

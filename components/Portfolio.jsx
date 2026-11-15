@@ -6,7 +6,7 @@ import {
   Home, User, Award, FolderGit2, Mail, Sun, Moon, Leaf, Menu, X, MapPin, GraduationCap, Briefcase,
   Search, ArrowUpRight, ArrowRight, FileDown, Music2, Pause, Copy, Check, Code2, Send, Globe,
   Instagram, Linkedin, Github, LayoutGrid, PanelLeft, PanelTop, Trophy, Layers, Languages, Sparkles, BookOpen,
-  Database, Workflow, PenTool, MousePointerClick, MessagesSquare, Users, Bot, Regex,
+  Database, Workflow, PenTool, MousePointerClick, MessagesSquare, Users, Bot, Regex, ShieldCheck,
 } from "lucide-react";
 import { burst } from "./ClickBurst";
 import Dashboard from "./Dashboard";
@@ -751,7 +751,15 @@ export default function Portfolio() {
         <div className="modal" role="dialog" aria-modal="true" aria-label={L(cert.title)} onClick={() => setCert(null)}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
             <button className="icon-btn modal-x" onClick={() => setCert(null)} aria-label={T.close} autoFocus><X size={18} /></button>
-            <img src={cert.img} alt={L(cert.title)} />
+            <div className="cm-img">
+              <span>
+                <img src={cert.img} alt={L(cert.title)} onLoad={(e) => e.currentTarget.parentElement.style.setProperty("--ar", e.currentTarget.naturalWidth / e.currentTarget.naturalHeight)} />
+                {cert.verify && cert.hotspot && (
+                  <a className="cert-hotspot" href={cert.verify} {...ext} aria-label={T.verify}
+                    style={{ left: cert.hotspot[0] + "%", top: cert.hotspot[1] + "%", width: cert.hotspot[2] + "%", height: cert.hotspot[3] + "%" }} />
+                )}
+              </span>
+            </div>
             <div className="modal-info">
               <span className="tag strong">{L(achievementTypes[cert.type])}</span>
               <h3>{L(cert.title)}</h3>
@@ -761,7 +769,10 @@ export default function Portfolio() {
                 {cert.valid && <div><dt>{T.validUntil}</dt><dd>{L(cert.valid)}</dd></div>}
                 <div><dt>{T.credential}</dt><dd className="mono">{L(cert.code)}</dd></div>
               </dl>
-              <a className="btn solid small" href={cert.pdf} {...ext}>{T.openPdf} <ArrowUpRight size={14} /></a>
+              <div className="cert-actions">
+                <a className="btn solid small" href={cert.pdf} {...ext}>{T.openPdf} <ArrowUpRight size={14} /></a>
+                {cert.verify && <a className="btn small" href={cert.verify} {...ext}><ShieldCheck size={14} /> {T.verify}</a>}
+              </div>
             </div>
           </div>
         </div>
