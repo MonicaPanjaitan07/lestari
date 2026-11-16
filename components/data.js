@@ -199,6 +199,18 @@ export const achievements = [
     hotspot: [26.5, 72.8, 39, 5.6], // posisi tulisan link di gambar (kiri, atas, lebar, tinggi dalam %)
   },
   {
+    key: "oracle-oci-ai", kind: "official", type: "cert",
+    title: "Oracle Cloud Infrastructure Certified AI Foundations Associate",
+    issuer: "Oracle University",
+    code: "331698388OCI26AICFA",
+    tags: ["Oracle", "OCI", "AI", "Cloud"],
+    date: { id: "14 November 2026", en: "November 14, 2026" },
+    valid: { id: "14 November 2028", en: "November 14, 2028" },
+    img: "/certificates/oracle-oci-ai.jpg", pdf: "/certificates/oracle-oci-ai.pdf",
+    verify: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=0700418c6911fca28fccb3238ff877e414c2907d8dded26b2f057c7e902ca8b6",
+    hotspot: [80.2, 59.6, 9.4, 14.2], // QR "scan to verify" di gambar
+  },
+  {
     key: "oracle", kind: "official", type: "cert",
     title: "Oracle AI Database Certified Foundations Associate",
     issuer: "Oracle University",
