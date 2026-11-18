@@ -6,7 +6,7 @@ import {
   Home, User, Award, FolderGit2, Mail, Sun, Moon, Leaf, Menu, X, MapPin, GraduationCap, Briefcase,
   Search, ArrowUpRight, ArrowRight, FileDown, Music2, Pause, Copy, Check, Code2, Send, Globe,
   Instagram, Linkedin, Github, LayoutGrid, PanelLeft, PanelTop, Trophy, Layers, Languages, Sparkles, BookOpen,
-  Database, Workflow, PenTool, MousePointerClick, MessagesSquare, Users, Bot, Regex, ShieldCheck,
+  Database, Workflow, PenTool, MousePointerClick, MessagesSquare, Users, Bot, Regex, ShieldCheck, Bug,
 } from "lucide-react";
 import { burst } from "./ClickBurst";
 import Dashboard from "./Dashboard";
@@ -20,7 +20,7 @@ const PAGES = ["home", "about", "dashboard", "achievements", "projects", "contac
 const NAV_ICON = { home: Home, about: User, achievements: Award, projects: FolderGit2, dashboard: LayoutGrid, contact: Mail };
 const THEMES = [["light", Sun], ["dark", Moon], ["nature", Leaf]];
 const SOCIAL_ICON = { email: Mail, whatsapp: WhatsAppIcon, linkedin: Linkedin, github: Github, instagram: Instagram, tiktok: TikTokIcon };
-const SKILL_ICON = { Database, Workflow, PenTool, MousePointerClick, MessagesSquare, Users, Bot, Sparkles, Regex };
+const SKILL_ICON = { Database, Workflow, PenTool, MousePointerClick, MessagesSquare, Users, Bot, Sparkles, Regex, Bug };
 const DEVICON = "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/";
 const ext = { target: "_blank", rel: "noopener noreferrer" };
 

@@ -172,6 +172,26 @@ export const education = [
 
 export const experience = [
   {
+    title: { id: "Panitia Dokumentasi Kaderisasi Mahasiswa Baru Angkatan 2026", en: "Documentation Committee, Freshmen Cadre Program (Class of 2026)" },
+    org: "Institut Teknologi Del",
+    when: { id: "Okt 2026", en: "Oct 2026" },
+    logo: "/logos/itdel.png",
+    text: {
+      id: "Bertugas di divisi dokumentasi, mengabadikan kegiatan kaderisasi mahasiswa baru angkatan 2026 lewat foto dan video.",
+      en: "Served in the documentation division, capturing the Class of 2026 freshmen cadre program in photos and videos.",
+    },
+  },
+  {
+    title: { id: "Panitia Dekorasi Wisuda & Inaugurasi (Dies Natalis) 2026", en: "Decoration Committee, Graduation & Inauguration (Dies Natalis) 2026" },
+    org: "Institut Teknologi Del",
+    when: { id: "2026", en: "2026" },
+    logo: "/logos/itdel.png",
+    text: {
+      id: "Ikut menyiapkan dekorasi untuk acara wisuda dan inaugurasi Dies Natalis IT Del.",
+      en: "Helped prepare the decorations for IT Del's graduation and Dies Natalis inauguration events.",
+    },
+  },
+  {
     title: { id: "Panitia Bebras Challenge 2025", en: "Committee Member, Bebras Challenge 2025" },
     org: "Biro Bebras · Institut Teknologi Del",
     when: { id: "Nov 2025", en: "Nov 2025" },
@@ -278,6 +298,7 @@ export const achievementTypes = {
 // Sesuai CV. icon: nama ikon dari devicon.dev. Kalau tidak ada, pakai lucide (nama ikon lucide.dev) + color.
 export const skillGroups = {
   web: "Web Development", data: { id: "Data & Database", en: "Data & Databases" }, design: "Design", auto: { id: "Otomasi & AI", en: "Automation & AI" }, tools: "Tools",
+  testing: "Software Testing",
   soft: { id: "Soft skill", en: "Soft skills" },
 };
 export const skills = [
@@ -305,6 +326,8 @@ export const skills = [
   { name: "GitHub", group: "tools", icon: "github/github-original" },
   { name: "Visual Studio Code", group: "tools", icon: "vscode/vscode-original" },
   { name: "Vercel", group: "tools", icon: "vercel/vercel-original", invert: true },
+  { name: "Katalon Studio", group: "testing", icon: "", lucide: "Bug", color: "#22a06b" },
+  { name: { id: "Postman (uji API)", en: "Postman (API testing)" }, group: "testing", icon: "postman/postman-original" },
   { name: { id: "Komunikasi", en: "Communication" }, group: "soft", icon: "", lucide: "MessagesSquare", color: "#10b981" },
   { name: { id: "Kerja tim", en: "Teamwork" }, group: "soft", icon: "", lucide: "Users", color: "#6366f1" },
 ];
@@ -401,7 +424,7 @@ export const projects = [
     key: "pardede",
     title: "Pardede Catering App",
     label: { id: "Proyek Akhir · 2026", en: "Final Project · 2026" },
-    role: "UI/UX Designer & Developer",
+    role: "UI/UX Designer, Developer & Tester",
     short: {
       id: "Aplikasi pemesanan katering online: aplikasi mobile untuk pelanggan dan website admin untuk mengelola semua pesanan.",
       en: "An online catering ordering system: a mobile app for customers and an admin website to manage every order.",
@@ -411,20 +434,20 @@ export const projects = [
         "Pardede Catering adalah sistem pemesanan katering secara online. Pelanggan tidak perlu datang atau menelepon — cukup buka aplikasi, pilih menu (nasi box, prasmanan, snack box), lalu pesan.",
         "Aplikasi mobile khusus untuk pelanggan: mereka bisa membuat akun, masuk dengan akun tersebut, melihat menu populer dan terlaris, memesan, membayar, dan mengobrol langsung dengan pihak katering lewat chat real-time.",
         "Di sisi lain, website admin dipakai pihak Pardede Catering untuk mengelola semua pesanan yang masuk — mulai dari memantau status pesanan sampai melihat ringkasan penjualan di dashboard.",
-        "Peranku: merancang UI/UX dan prototipe interaktif di Figma, lalu ikut membangun aplikasinya dengan Laravel dan MySQL bersama tim. Proyek ini kami presentasikan di pameran proyek kampus IT Del.",
+        "Peranku: merancang UI/UX dan prototipe interaktif di Figma, ikut membangun aplikasinya dengan Laravel dan MySQL bersama tim, lalu menguji aplikasinya dengan Katalon Studio supaya fitur-fitur utamanya berjalan dengan benar. Proyek ini kami presentasikan di pameran proyek kampus IT Del.",
       ],
       en: [
         "Pardede Catering is an online catering ordering system. Customers no longer need to visit or call — they open the app, pick a menu (rice boxes, buffet, snack boxes) and order.",
         "The mobile app is for customers only: they can create an account, sign in with it, browse popular and best-selling menus, place orders, pay, and talk to the caterer through real-time chat.",
         "On the other side, the admin website lets Pardede Catering manage every incoming order — from tracking order status to viewing a sales summary on the dashboard.",
-        "My role: designing the UI/UX and interactive prototypes in Figma, then helping build the app with Laravel and MySQL as part of the team. We presented it at the IT Del campus project exhibition.",
+        "My role: designing the UI/UX and interactive prototypes in Figma, helping build the app with Laravel and MySQL as part of the team, and testing it with Katalon Studio to make sure the main features worked correctly. We presented it at the IT Del campus project exhibition.",
       ],
     },
     features: {
       id: ["Daftar & masuk akun pelanggan", "Katalog menu per kategori", "Pemesanan & pembayaran", "Chat real-time", "Dashboard admin untuk kelola pesanan"],
       en: ["Customer sign-up & sign-in", "Menu catalog by category", "Ordering & payment", "Real-time chat", "Admin dashboard to manage orders"],
     },
-    stack: ["Laravel", "MySQL", "Figma"],
+    stack: ["Laravel", "MySQL", "Figma", "Katalon Studio"],
     image: "/projects/pardede-cover.jpg",
     screens: [
       { src: "/projects/pardede-app-1.png", kind: "phone", caption: { id: "Halaman pembuka", en: "Welcome screen" } },
