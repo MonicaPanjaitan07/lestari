@@ -34,7 +34,8 @@ export const socials = [
 
 export const ui = {
   id: {
-    nav: { home: "Beranda", about: "Tentang", achievements: "Pencapaian", projects: "Proyek", dashboard: "Dashboard", contact: "Kontak" },
+    nav: { home: "Beranda", about: "Tentang", journey: "Perjalanan", achievements: "Pencapaian", projects: "Proyek", dashboard: "Dashboard", contact: "Kontak" },
+    journeySub: "Dari SMA sampai sekarang, urut dari yang paling baru.",
     dash: {
       sub: "Statistik pengunjung portofolio ini dan aktivitas GitHub-ku, diperbarui otomatis.",
       visitors: "Analitik Pengunjung", visitorsSub: "Siapa saja yang mampir ke portofolio ini.",
@@ -79,7 +80,8 @@ export const ui = {
     rights: "Hak cipta dilindungi.",
   },
   en: {
-    nav: { home: "Home", about: "About", achievements: "Achievements", projects: "Projects", dashboard: "Dashboard", contact: "Contact" },
+    nav: { home: "Home", about: "About", journey: "Journey", achievements: "Achievements", projects: "Projects", dashboard: "Dashboard", contact: "Contact" },
+    journeySub: "From high school to now, newest first.",
     dash: {
       sub: "Visitor statistics for this portfolio and my GitHub activity, updated automatically.",
       visitors: "Visitor Analytics", visitorsSub: "Who's been stopping by this portfolio.",
@@ -161,6 +163,25 @@ export const education = [
     years: "2021 – 2024",
     logo: "/logos/sman1-silaen.png",
   },
+];
+
+// Perjalanan (timeline), urut dari yang terbaru. type: edu | project | cert | org | course | comp
+export const journey = [
+  { year: "2026", type: "cert", when: { id: "Nov", en: "Nov" }, title: "AWS Certified Cloud Practitioner", text: { id: "Sertifikasi resmi Amazon Web Services.", en: "Official Amazon Web Services certification." } },
+  { year: "2026", type: "cert", when: { id: "Nov", en: "Nov" }, title: "Oracle Cloud Infrastructure Certified AI Foundations Associate", text: { id: "Sertifikasi AI dari Oracle University.", en: "AI certification from Oracle University." } },
+  { year: "2026", type: "org", when: { id: "Okt", en: "Oct" }, title: { id: "Panitia Dokumentasi Kaderisasi Angkatan 2026", en: "Documentation Committee, Freshmen Cadre Program 2026" }, text: { id: "Mendokumentasikan kegiatan kaderisasi mahasiswa baru IT Del.", en: "Documented the freshmen cadre program at IT Del." } },
+  { year: "2026", type: "cert", when: { id: "Sep", en: "Sep" }, title: "Oracle AI Database Certified Foundations Associate", text: { id: "Sertifikasi resmi pertamaku.", en: "My first official certification." } },
+  { year: "2026", type: "course", when: { id: "Jul", en: "Jul" }, title: "Data Engineer Bootcamp (Dibimbing)", text: { id: "Bootcamp 5 hari tentang dasar data engineering.", en: "A 5-day bootcamp on data engineering fundamentals." } },
+  { year: "2026", type: "comp", when: { id: "Jul", en: "Jul" }, title: { id: "Juara 5 Pixelnoid Dev Weekend Season 2", en: "5th Place, Pixelnoid Dev Weekend Season 2" }, text: { id: "Kompetisi 2 hari: Machine Learning + Laravel.", en: "A 2-day competition: Machine Learning + Laravel." } },
+  { year: "2026", type: "course", when: { id: "Jul", en: "Jul" }, title: { id: "Mini course Cyber Security & AI Engineering", en: "Cyber Security & AI Engineering mini courses" }, text: { id: "Dua kelas singkat dari ReWork Academy.", en: "Two short courses from ReWork Academy." } },
+  { year: "2026", type: "project", when: { id: "2026", en: "2026" }, title: "AntreKita", text: { id: "Web booking ruang diskusi perpustakaan IT Del dengan asisten AI. Proyek pribadi.", en: "A room-booking web app for the IT Del library with an AI assistant. Personal project." } },
+  { year: "2026", type: "project", when: { id: "2026", en: "2026" }, title: "InvoiceGuard", text: { id: "Robot UiPath untuk Automation Hackathon.", en: "A UiPath robot for an Automation Hackathon." } },
+  { year: "2026", type: "project", when: { id: "2026", en: "2026" }, title: "Pardede Catering", text: { id: "Proyek Akhir 2: desain UI/UX, ikut ngoding, dan testing dengan Katalon.", en: "Final Project 2: UI/UX design, development, and testing with Katalon." } },
+  { year: "2026", type: "org", when: { id: "2026", en: "2026" }, title: { id: "Panitia Dekorasi Wisuda & Dies Natalis", en: "Decoration Committee, Graduation & Dies Natalis" }, text: { id: "Menyiapkan dekorasi acara wisuda dan inaugurasi IT Del.", en: "Prepared decorations for IT Del's graduation and inauguration." } },
+  { year: "2025", type: "org", when: { id: "Nov", en: "Nov" }, title: { id: "Panitia Bebras Challenge 2025", en: "Committee Member, Bebras Challenge 2025" }, text: { id: "Ikut menjalankan tantangan berpikir komputasional untuk siswa sekolah.", en: "Helped run a computational-thinking challenge for school students." } },
+  { year: "2025", type: "project", when: { id: "2025", en: "2025" }, title: "Web Firman Taylor", text: { id: "Proyek Akhir 1: website pemesanan jahit online.", en: "Final Project 1: an online tailoring order website." } },
+  { year: "2024", type: "edu", when: { id: "Sep", en: "Sep" }, title: { id: "Mulai kuliah di Institut Teknologi Del", en: "Started college at Del Institute of Technology" }, text: { id: "Program studi Teknologi Informasi.", en: "Information Technology program." } },
+  { year: "2024", type: "edu", when: { id: "2021 – 2024", en: "2021 – 2024" }, title: { id: "Lulus SMA Negeri 1 Silaen", en: "Graduated from SMA Negeri 1 Silaen" }, text: { id: "Jurusan IPA.", en: "Science program." } },
 ];
 
 export const experience = [

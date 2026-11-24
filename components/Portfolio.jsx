@@ -6,18 +6,18 @@ import {
   Home, User, Award, FolderGit2, Mail, Sun, Moon, Leaf, Menu, X, MapPin, GraduationCap, Briefcase,
   Search, ArrowUpRight, ArrowRight, FileDown, Music2, Pause, Copy, Check, Code2, Send, Globe,
   Instagram, Linkedin, Github, LayoutGrid, PanelLeft, PanelTop, Trophy, Layers, Languages, Sparkles, BookOpen,
-  Database, Workflow, PenTool, MousePointerClick, MessagesSquare, Users, Bot, Regex, ShieldCheck, Bug,
+  Database, Workflow, PenTool, MousePointerClick, MessagesSquare, Users, Bot, Regex, ShieldCheck, Bug, Route,
 } from "lucide-react";
-import { burst } from "./ClickBurst";
 import Dashboard from "./Dashboard";
 import { TikTokIcon, WhatsAppIcon } from "./BrandIcons";
 import {
   site, socials, ui, about, languages, education, experience, achievements, achievementTypes,
-  skillGroups, skills, interests, projects,
+  skillGroups, skills, interests, projects, journey,
 } from "./data";
 
-const PAGES = ["home", "about", "dashboard", "achievements", "projects", "contact"];
-const NAV_ICON = { home: Home, about: User, achievements: Award, projects: FolderGit2, dashboard: LayoutGrid, contact: Mail };
+const PAGES = ["home", "about", "journey", "dashboard", "achievements", "projects", "contact"];
+const NAV_ICON = { home: Home, about: User, journey: Route, achievements: Award, projects: FolderGit2, dashboard: LayoutGrid, contact: Mail };
+const JOURNEY_ICON = { edu: GraduationCap, project: FolderGit2, cert: Award, org: Users, course: BookOpen, comp: Trophy };
 const THEMES = [["light", Sun], ["dark", Moon], ["nature", Leaf]];
 const SOCIAL_ICON = { email: Mail, whatsapp: WhatsAppIcon, linkedin: Linkedin, github: Github, instagram: Instagram, tiktok: TikTokIcon };
 const SKILL_ICON = { Database, Workflow, PenTool, MousePointerClick, MessagesSquare, Users, Bot, Sparkles, Regex, Bug };
@@ -385,6 +385,39 @@ function ProjectsPage({ T, L }) {
   );
 }
 
+/* ───────── Perjalanan ───────── */
+function JourneyPage({ T, L }) {
+  const years = [...new Set(journey.map((j) => j.year))];
+  let n = 0;
+  return (
+    <>
+      <PageHead title={T.nav.journey} sub={T.journeySub} />
+      <div className="jr">
+        {years.map((y) => (
+          <section key={y} className="jr-year">
+            <h2 className="jr-y rv" style={{ "--i": ++n }}>{y}</h2>
+            <ol className="jr-list">
+              {journey.filter((j) => j.year === y).map((j, k) => {
+                const Icon = JOURNEY_ICON[j.type] || Award;
+                return (
+                  <li key={k} className={`jr-item rv t-${j.type}`} style={{ "--i": ++n }}>
+                    <span className="jr-dot"><Icon size={14} strokeWidth={2} /></span>
+                    <div className="jr-body">
+                      <span className="jr-when">{L(j.when)}</span>
+                      <h3>{L(j.title)}</h3>
+                      {j.text && <p>{L(j.text)}</p>}
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
+          </section>
+        ))}
+      </div>
+    </>
+  );
+}
+
 function ContactPage({ T }) {
   const [name, setName] = useState("");
   const [msg, setMsg] = useState("");
@@ -438,23 +471,17 @@ function ContactPage({ T }) {
 // Status yang berganti otomatis (fade out → fade in tiap ±2,8 detik).
 function RotatingStatus({ items }) {
   const [i, setI] = useState(0);
-  const [w, setW] = useState(null);
-  const box = useRef(null);
   useEffect(() => {
     setI(0);
     if (items.length < 2 || reduced()) return;
     const id = setInterval(() => setI((n) => (n + 1) % items.length), 2800);
     return () => clearInterval(id);
   }, [items]);
-  // Lebar kotak menyesuaikan panjang teks yang sedang tampil (berubah halus)
-  useEffect(() => {
-    const el = box.current?.querySelector(".rot > span.on");
-    if (el) setW(el.scrollWidth);
-  }, [i, items]);
+  // Semua teks ditumpuk di tempat yang sama, jadi lebar kotak selalu selebar teks terpanjang dan tidak bergeser
   return (
-    <span className="status" role="status" aria-live="polite" ref={box}>
+    <span className="status" role="status" aria-live="polite">
       <i aria-hidden="true" />
-      <span className="rot" style={w ? { width: w } : undefined}>
+      <span className="rot">
         {items.map((t, k) => <span key={k} className={k === i ? "on" : ""} aria-hidden={k !== i}>{t}</span>)}
       </span>
     </span>
@@ -568,15 +595,9 @@ export default function Portfolio() {
       window.scrollTo(0, 0);
       history.pushState(null, "", id === "home" ? location.pathname : `#${id}`);
     };
-    // Gelombang riak kecil dari titik klik
-    if (e && e.detail !== 0 && e.clientX) burst(e.clientX, e.clientY);
-    else {
-      const el = e?.currentTarget?.getBoundingClientRect?.();
-      if (el) burst(el.left + 24, el.top + el.height / 2);
-    }
-    // Ikon menu yang diklik memantul
-    const ic = e?.currentTarget?.querySelector?.("svg");
-    if (ic) { ic.classList.remove("pop"); void ic.getBoundingClientRect(); ic.classList.add("pop"); }
+    // Menu yang diklik: tombol sedikit tertekan + ikon bergeser ke kanan
+    const a = e?.currentTarget;
+    if (a?.classList) { a.classList.remove("press"); void a.offsetWidth; a.classList.add("press"); }
     // Halaman lama bergeser keluar (blur), lalu halaman baru masuk dari kanan
     const pg = mainRef.current?.querySelector(".page");
     if (reduced() || !pg) return swap();
@@ -748,6 +769,7 @@ export default function Portfolio() {
           <div className="page" key={page}>
             {page === "home" && <HomePage {...pageProps} />}
             {page === "about" && <AboutPage {...pageProps} />}
+            {page === "journey" && <JourneyPage {...pageProps} />}
             {page === "achievements" && <AchievementsPage {...pageProps} />}
             {page === "projects" && <ProjectsPage {...pageProps} />}
             {page === "dashboard" && <Dashboard {...pageProps} PageHead={PageHead} />}
