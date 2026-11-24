@@ -36,6 +36,7 @@ export const ui = {
   id: {
     nav: { home: "Beranda", about: "Tentang", journey: "Perjalanan", achievements: "Pencapaian", projects: "Proyek", dashboard: "Dashboard", contact: "Kontak" },
     journeySub: "Dari SMA sampai sekarang, urut dari yang paling baru.",
+    jtype: { edu: "Pendidikan", project: "Proyek", cert: "Sertifikat", org: "Organisasi", course: "Kursus", comp: "Lomba" },
     dash: {
       sub: "Statistik pengunjung portofolio ini dan aktivitas GitHub-ku, diperbarui otomatis.",
       visitors: "Analitik Pengunjung", visitorsSub: "Siapa saja yang mampir ke portofolio ini.",
@@ -82,6 +83,7 @@ export const ui = {
   en: {
     nav: { home: "Home", about: "About", journey: "Journey", achievements: "Achievements", projects: "Projects", dashboard: "Dashboard", contact: "Contact" },
     journeySub: "From high school to now, newest first.",
+    jtype: { edu: "Education", project: "Project", cert: "Certificate", org: "Organization", course: "Course", comp: "Competition" },
     dash: {
       sub: "Visitor statistics for this portfolio and my GitHub activity, updated automatically.",
       visitors: "Visitor Analytics", visitorsSub: "Who's been stopping by this portfolio.",

@@ -17,7 +17,6 @@ import {
 
 const PAGES = ["home", "about", "journey", "dashboard", "achievements", "projects", "contact"];
 const NAV_ICON = { home: Home, about: User, journey: Route, achievements: Award, projects: FolderGit2, dashboard: LayoutGrid, contact: Mail };
-const JOURNEY_ICON = { edu: GraduationCap, project: FolderGit2, cert: Award, org: Users, course: BookOpen, comp: Trophy };
 const THEMES = [["light", Sun], ["dark", Moon], ["nature", Leaf]];
 const SOCIAL_ICON = { email: Mail, whatsapp: WhatsAppIcon, linkedin: Linkedin, github: Github, instagram: Instagram, tiktok: TikTokIcon };
 const SKILL_ICON = { Database, Workflow, PenTool, MousePointerClick, MessagesSquare, Users, Bot, Sparkles, Regex, Bug };
@@ -392,25 +391,24 @@ function JourneyPage({ T, L }) {
   return (
     <>
       <PageHead title={T.nav.journey} sub={T.journeySub} />
-      <div className="jr">
+      <div className="jr2">
         {years.map((y) => (
-          <section key={y} className="jr-year">
-            <h2 className="jr-y rv" style={{ "--i": ++n }}>{y}</h2>
-            <ol className="jr-list">
+          <section key={y} className="jr2-year">
+            <h2 className="jr2-y rv" style={{ "--i": ++n }}>{y}</h2>
+            <ul className="jr2-list">
               {journey.filter((j) => j.year === y).map((j, k) => {
-                const Icon = JOURNEY_ICON[j.type] || Award;
+                const when = L(j.when);
                 return (
-                  <li key={k} className={`jr-item rv t-${j.type}`} style={{ "--i": ++n }}>
-                    <span className="jr-dot"><Icon size={14} strokeWidth={2} /></span>
-                    <div className="jr-body">
-                      <span className="jr-when">{L(j.when)}</span>
-                      <h3>{L(j.title)}</h3>
+                  <li key={k} className="jr2-row rv" style={{ "--i": ++n }}>
+                    <span className="jr2-m">{when === y ? "" : when}</span>
+                    <div className="jr2-txt">
+                      <h3>{L(j.title)} <span className={`jr2-tag t-${j.type}`}>{T.jtype[j.type]}</span></h3>
                       {j.text && <p>{L(j.text)}</p>}
                     </div>
                   </li>
                 );
               })}
-            </ol>
+            </ul>
           </section>
         ))}
       </div>

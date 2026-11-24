@@ -718,21 +718,23 @@ main.swap-in .page { animation: unblur .4s var(--out); }
 @keyframes sheet-out { to { opacity: 0; transform: scale(.985); filter: none; } }
 @media (prefers-reduced-motion: reduce) { .page, .page.leaving, .nav a.press, .nav a.press > svg { animation: none; } }
 
-/* ───────── Perjalanan (timeline) ───────── */
-.jr { display: grid; gap: 2rem; }
-.jr-y { font-size: 1.05rem; font-weight: 700; letter-spacing: .02em; color: var(--muted); margin-bottom: .8rem; }
-.jr-list { list-style: none; margin: 0; padding: 0 0 0 .2rem; position: relative; display: grid; gap: 1.1rem; }
-.jr-list::before { content: ""; position: absolute; left: 1.05rem; top: .4rem; bottom: .4rem; width: 2px; background: var(--line); border-radius: 2px; }
-.jr-item { position: relative; display: grid; grid-template-columns: 2.1rem 1fr; gap: .9rem; align-items: start; }
-.jr-dot { position: relative; z-index: 1; width: 2.1rem; height: 2.1rem; display: grid; place-items: center; border-radius: 50%; background: var(--card); border: 1px solid var(--line); color: var(--accent, var(--fg)); box-shadow: 0 0 0 4px var(--bg); }
-.jr-body { padding: .7rem .95rem; border: 1px solid var(--line); border-radius: 12px; background: var(--card); transition: border-color .2s, transform .2s; }
-.jr-item:hover .jr-body { border-color: color-mix(in srgb, var(--accent, var(--fg)) 35%, var(--line)); transform: translateX(2px); }
-.jr-when { display: inline-block; font-size: .72rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
-.jr-body h3 { font-size: .98rem; font-weight: 650; line-height: 1.35; margin: .1rem 0 .2rem; }
-.jr-body p { font-size: .88rem; color: var(--muted); margin: 0; }
-.jr-item.t-cert .jr-dot { color: #d97706; }
-.jr-item.t-project .jr-dot { color: #2563eb; }
-.jr-item.t-org .jr-dot { color: #db2777; }
-.jr-item.t-comp .jr-dot { color: #ca8a04; }
-.jr-item.t-course .jr-dot { color: #0d9488; }
-.jr-item.t-edu .jr-dot { color: #7c3aed; }
+/* ───────── Perjalanan: daftar ringkas per tahun, tanpa kotak ───────── */
+.jr2 { display: grid; gap: 2.2rem; }
+.jr2-year { display: grid; gap: .4rem; }
+.jr2-y { font-size: 2rem; font-weight: 700; letter-spacing: -.03em; line-height: 1; color: color-mix(in srgb, var(--fg) 22%, transparent); }
+.jr2-list { list-style: none; margin: 0; padding: 0; }
+.jr2-row { display: grid; grid-template-columns: 3.2rem 1fr; gap: 1rem; padding: .85rem 0; border-bottom: 1px dashed var(--line); }
+.jr2-row:last-child { border-bottom: 0; }
+.jr2-m { font-size: .78rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); padding-top: .15rem; }
+.jr2-txt h3 { font-size: .98rem; font-weight: 600; line-height: 1.4; }
+.jr2-txt p { margin-top: .15rem; font-size: .88rem; color: var(--muted); }
+.jr2-tag { display: inline-block; margin-left: .35rem; padding: .05rem .45rem; border-radius: 6px; font-size: .68rem; font-weight: 600; vertical-align: .12em; color: var(--tc); background: color-mix(in srgb, var(--tc) 12%, transparent); }
+.jr2-tag.t-cert { --tc: #c2410c; } .jr2-tag.t-project { --tc: #2563eb; } .jr2-tag.t-org { --tc: #be185d; }
+.jr2-tag.t-comp { --tc: #a16207; } .jr2-tag.t-course { --tc: #0f766e; } .jr2-tag.t-edu { --tc: #6d28d9; }
+[data-theme="dark"] .jr2-tag { color: color-mix(in srgb, var(--tc) 55%, white); }
+.jr2-row:hover .jr2-txt h3 { color: var(--accent, var(--fg)); }
+@media (min-width: 900px) {
+  .jr2-year { grid-template-columns: 7rem 1fr; gap: 1.5rem; align-items: start; }
+  .jr2-y { position: sticky; top: 1.5rem; font-size: 2.4rem; padding-top: .6rem; }
+  .shell.top .jr2-y { top: 9rem; }
+}
