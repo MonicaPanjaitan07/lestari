@@ -1,13 +1,6 @@
 // ✏️ Semua isi portofolio diedit di file ini.
 // Teks dua bahasa ditulis { id: "...", en: "..." }.
 
-// Musik favorit di halaman About (Spotify embed)
-export const spotify = [
-  { artist: "NIKI", id: "2kxP07DLgs4xlWz8YHlvfh" },
-  { artist: "Taylor Swift", id: "06HL4z0CvFAxyc27GXpf02" },
-  { artist: "LANY", id: "49tQo2QULno7gxHutgccqF" },
-];
-
 export const site = {
   name: "Monica Putri Lestari Panjaitan",
   short: "Lestari",
@@ -72,7 +65,7 @@ export const ui = {
     tabNote: { official: "Sertifikasi, kompetisi, dan kepanitiaan.", course: "Sertifikat keikutsertaan dari mini course dan bootcamp — bukan sertifikasi resmi." },
     languages: "Bahasa", languagesSub: "Bahasa yang aku kuasai.",
     interests: "Minat lain",
-    dreamCap: "suatu hari nanti · Swiss", onRepeat: "Lagi sering diputar", onRepeatText: "Tiga nama yang paling sering muncul di playlist-ku. Pilih salah satu, lalu putar langsung di sini.", onRepeatHint: "Putar langsung di sini, musik latar web otomatis berhenti.",
+   
     search: "Cari sertifikat...", total: "Total", empty: "Tidak ada yang cocok.",
     issued: "Diterbitkan", validUntil: "Berlaku sampai", credential: "ID kredensial", openPdf: "Buka PDF", verify: "Verifikasi",
     projSub: "Proyek yang pernah aku kerjakan, sebagian besar bersama tim.",
@@ -118,7 +111,7 @@ export const ui = {
     tabNote: { official: "Certifications, competitions and committees.", course: "Participation certificates from mini courses and bootcamps — not official certifications." },
     languages: "Languages", languagesSub: "Languages I speak.",
     interests: "Other interests",
-    dreamCap: "someday · Switzerland", onRepeat: "On repeat", onRepeatText: "The three names that show up most in my playlist. Pick one and play it right here.", onRepeatHint: "Play it right here, the site's background music pauses automatically.",
+   
     search: "Search certificates...", total: "Total", empty: "Nothing matches.",
     issued: "Issued", validUntil: "Valid until", credential: "Credential ID", openPdf: "Open PDF", verify: "Verify",
     projSub: "Projects I've worked on, mostly as part of a team.",

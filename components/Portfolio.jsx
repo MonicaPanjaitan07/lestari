@@ -12,7 +12,7 @@ import Dashboard from "./Dashboard";
 import { TikTokIcon, WhatsAppIcon } from "./BrandIcons";
 import {
   site, socials, ui, about, languages, education, experience, achievements, achievementTypes,
-  skillGroups, skills, interests, projects, spotify,
+  skillGroups, skills, interests, projects,
 } from "./data";
 
 const PAGES = ["home", "about", "dashboard", "achievements", "projects", "contact"];
@@ -155,14 +155,6 @@ function AboutPage({ T, L, lang }) {
         {about[lang].map((p, i) => (
           <Fragment key={i}>
             <p className="rv" style={{ "--i": i + 1 }}>{p}</p>
-            {i === 1 && (
-              <figure className="dream rv" style={{ "--i": i + 1 }} aria-hidden="true">
-                <span className="d-sun" /><span className="d-cloud c1" /><span className="d-cloud c2" />
-                <span className="d-mt m1" /><span className="d-mt m2" /><span className="d-mt m3" />
-                <span className="d-hill h1" /><span className="d-hill h2" />
-                <figcaption>{T.dreamCap}</figcaption>
-              </figure>
-            )}
           </Fragment>
         ))}
         <p className="rv" style={{ "--i": about[lang].length + 1 }}>{T.regards}</p>
@@ -228,9 +220,6 @@ function AboutPage({ T, L, lang }) {
         </div>
       </section>
 
-      <hr className="rule" />
-
-      <OnRepeat T={T} />
     </>
   );
 }
@@ -484,34 +473,6 @@ function NameIcon({ small }) {
   );
 }
 
-/* Lagu yang sering diputar: piringan hitam + pemutar Spotify, bisa ganti penyanyi */
-function OnRepeat({ T }) {
-  const [k, setK] = useState(0);
-  const cur = spotify[k];
-  return (
-    <section className="onrepeat rv" style={{ "--i": 16 }}>
-      <div className="vinyl-wrap" aria-hidden="true">
-        <div className="vinyl" key={cur.id}><span className="vinyl-label">{cur.artist}</span></div>
-        <span className="tonearm" />
-      </div>
-      <div className="onrepeat-txt">
-        <p className="eyebrow"><Music2 size={13} /> {T.onRepeat}</p>
-        <h3>{spotify.map((a) => a.artist).join(" · ")}</h3>
-        <p>{T.onRepeatText}</p>
-        <div className="artist-pick" role="tablist">
-          {spotify.map((a, i) => (
-            <button key={a.id} role="tab" aria-selected={i === k} className={i === k ? "on" : ""} onClick={() => setK(i)}>{a.artist}</button>
-          ))}
-        </div>
-      </div>
-      <div className="onrepeat-player">
-        <iframe key={cur.id} title={`${cur.artist} di Spotify`} src={`https://open.spotify.com/embed/artist/${cur.id}?utm_source=generator`}
-          width="100%" height="352" frameBorder="0" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" />
-        <small>{T.onRepeatHint}</small>
-      </div>
-    </section>
-  );
-}
 
 /* ───────── Kerangka utama ───────── */
 
@@ -568,11 +529,6 @@ export default function Portfolio() {
     a.loop = true; a.volume = 0.5; a.preload = "auto"; audio.current = a;
     a.addEventListener("play", () => setPlaying(true));
     a.addEventListener("pause", () => setPlaying(false));
-    // Kalau pengunjung klik pemutar Spotify, musik latar dijeda supaya tidak tabrakan
-    const onBlur = () => setTimeout(() => {
-      if (document.activeElement?.tagName === "IFRAME" && !a.paused) a.pause();
-    }, 0);
-    window.addEventListener("blur", onBlur);
     const events = ["pointerdown", "keydown", "touchstart", "wheel", "scroll"];
     const unlock = (ev) => {
       if (ev?.target?.closest?.(".fab-music")) return; // tombol musik ditangani sendiri
