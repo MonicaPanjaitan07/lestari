@@ -1,22 +1,22 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import { flushSync, createPortal } from "react-dom";
 import {
   Home, User, Award, FolderGit2, Mail, Sun, Moon, Leaf, Menu, X, MapPin, GraduationCap, Briefcase,
   Search, ArrowUpRight, ArrowRight, FileDown, Music2, Pause, Copy, Check, Code2, Send, Globe,
   Instagram, Linkedin, Github, LayoutGrid, PanelLeft, PanelTop, Trophy, Layers, Languages, Sparkles, BookOpen,
-  Database, Workflow, PenTool, MousePointerClick, MessagesSquare, Users, Bot, Regex, ShieldCheck, Bug, Route,
+  Database, Workflow, PenTool, MousePointerClick, MessagesSquare, Users, Bot, Regex, ShieldCheck, Bug,
 } from "lucide-react";
 import Dashboard from "./Dashboard";
 import { TikTokIcon, WhatsAppIcon } from "./BrandIcons";
 import {
   site, socials, ui, about, languages, education, experience, achievements, achievementTypes,
-  skillGroups, skills, interests, projects, journey,
+  skillGroups, skills, interests, projects, spotify,
 } from "./data";
 
-const PAGES = ["home", "about", "journey", "dashboard", "achievements", "projects", "contact"];
-const NAV_ICON = { home: Home, about: User, journey: Route, achievements: Award, projects: FolderGit2, dashboard: LayoutGrid, contact: Mail };
+const PAGES = ["home", "about", "dashboard", "achievements", "projects", "contact"];
+const NAV_ICON = { home: Home, about: User, achievements: Award, projects: FolderGit2, dashboard: LayoutGrid, contact: Mail };
 const THEMES = [["light", Sun], ["dark", Moon], ["nature", Leaf]];
 const SOCIAL_ICON = { email: Mail, whatsapp: WhatsAppIcon, linkedin: Linkedin, github: Github, instagram: Instagram, tiktok: TikTokIcon };
 const SKILL_ICON = { Database, Workflow, PenTool, MousePointerClick, MessagesSquare, Users, Bot, Sparkles, Regex, Bug };
@@ -152,9 +152,21 @@ function AboutPage({ T, L, lang }) {
     <>
       <PageHead title={T.nav.about} sub={T.aboutSub} />
       <section className="about-text">
-        {about[lang].map((p, i) => <p key={i} className="rv" style={{ "--i": i + 1 }}>{p}</p>)}
-        <p className="rv" style={{ "--i": 4 }}>{T.regards}</p>
-        <p className="signature rv" style={{ "--i": 5 }}>Lestari</p>
+        {about[lang].map((p, i) => (
+          <Fragment key={i}>
+            <p className="rv" style={{ "--i": i + 1 }}>{p}</p>
+            {i === 1 && (
+              <figure className="dream rv" style={{ "--i": i + 1 }} aria-hidden="true">
+                <span className="d-sun" /><span className="d-cloud c1" /><span className="d-cloud c2" />
+                <span className="d-mt m1" /><span className="d-mt m2" /><span className="d-mt m3" />
+                <span className="d-hill h1" /><span className="d-hill h2" />
+                <figcaption>{T.dreamCap}</figcaption>
+              </figure>
+            )}
+          </Fragment>
+        ))}
+        <p className="rv" style={{ "--i": about[lang].length + 1 }}>{T.regards}</p>
+        <p className="signature rv" style={{ "--i": about[lang].length + 2 }}>Lestari</p>
       </section>
 
       <hr className="rule" />
@@ -215,6 +227,10 @@ function AboutPage({ T, L, lang }) {
           </div>
         </div>
       </section>
+
+      <hr className="rule" />
+
+      <OnRepeat T={T} />
     </>
   );
 }
@@ -384,38 +400,6 @@ function ProjectsPage({ T, L }) {
   );
 }
 
-/* ───────── Perjalanan ───────── */
-function JourneyPage({ T, L }) {
-  const years = [...new Set(journey.map((j) => j.year))];
-  let n = 0;
-  return (
-    <>
-      <PageHead title={T.nav.journey} sub={T.journeySub} />
-      <div className="jr2">
-        {years.map((y) => (
-          <section key={y} className="jr2-year">
-            <h2 className="jr2-y rv" style={{ "--i": ++n }}>{y}</h2>
-            <ul className="jr2-list">
-              {journey.filter((j) => j.year === y).map((j, k) => {
-                const when = L(j.when);
-                return (
-                  <li key={k} className="jr2-row rv" style={{ "--i": ++n }}>
-                    <span className="jr2-m">{when === y ? "" : when}</span>
-                    <div className="jr2-txt">
-                      <h3>{L(j.title)} <span className={`jr2-tag t-${j.type}`}>{T.jtype[j.type]}</span></h3>
-                      {j.text && <p>{L(j.text)}</p>}
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          </section>
-        ))}
-      </div>
-    </>
-  );
-}
-
 function ContactPage({ T }) {
   const [name, setName] = useState("");
   const [msg, setMsg] = useState("");
@@ -500,6 +484,35 @@ function NameIcon({ small }) {
   );
 }
 
+/* Lagu yang sering diputar: piringan hitam + pemutar Spotify, bisa ganti penyanyi */
+function OnRepeat({ T }) {
+  const [k, setK] = useState(0);
+  const cur = spotify[k];
+  return (
+    <section className="onrepeat rv" style={{ "--i": 16 }}>
+      <div className="vinyl-wrap" aria-hidden="true">
+        <div className="vinyl" key={cur.id}><span className="vinyl-label">{cur.artist}</span></div>
+        <span className="tonearm" />
+      </div>
+      <div className="onrepeat-txt">
+        <p className="eyebrow"><Music2 size={13} /> {T.onRepeat}</p>
+        <h3>{spotify.map((a) => a.artist).join(" · ")}</h3>
+        <p>{T.onRepeatText}</p>
+        <div className="artist-pick" role="tablist">
+          {spotify.map((a, i) => (
+            <button key={a.id} role="tab" aria-selected={i === k} className={i === k ? "on" : ""} onClick={() => setK(i)}>{a.artist}</button>
+          ))}
+        </div>
+      </div>
+      <div className="onrepeat-player">
+        <iframe key={cur.id} title={`${cur.artist} di Spotify`} src={`https://open.spotify.com/embed/artist/${cur.id}?utm_source=generator`}
+          width="100%" height="352" frameBorder="0" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" />
+        <small>{T.onRepeatHint}</small>
+      </div>
+    </section>
+  );
+}
+
 /* ───────── Kerangka utama ───────── */
 
 export default function Portfolio() {
@@ -555,6 +568,11 @@ export default function Portfolio() {
     a.loop = true; a.volume = 0.5; a.preload = "auto"; audio.current = a;
     a.addEventListener("play", () => setPlaying(true));
     a.addEventListener("pause", () => setPlaying(false));
+    // Kalau pengunjung klik pemutar Spotify, musik latar dijeda supaya tidak tabrakan
+    const onBlur = () => setTimeout(() => {
+      if (document.activeElement?.tagName === "IFRAME" && !a.paused) a.pause();
+    }, 0);
+    window.addEventListener("blur", onBlur);
     const events = ["pointerdown", "keydown", "touchstart", "wheel", "scroll"];
     const unlock = (ev) => {
       if (ev?.target?.closest?.(".fab-music")) return; // tombol musik ditangani sendiri
@@ -646,7 +664,7 @@ export default function Portfolio() {
     const place = (instant) => document.querySelectorAll(".nav").forEach((nav) => {
       const a = nav.querySelector("a.on"), ink = nav.querySelector(".nav-ink");
       if (!a || !ink) return;
-      const top = !!nav.closest(".topbar, .m-tabs");
+      const top = !!nav.closest(".topbar");
       if (instant) ink.style.transition = "none";
       ink.style.width = `${a.offsetWidth}px`;
       ink.style.height = top ? "2px" : `${a.offsetHeight}px`;
@@ -714,23 +732,15 @@ export default function Portfolio() {
           <img src={site.avatar} alt="" />
           <span className="mb-name">{site.name}</span>
         </a>
-        {LayoutBtn}
         <button className="icon-btn" onClick={() => setDrawer((d) => !d)} aria-label={T.menu} aria-expanded={drawer}>
           {drawer ? <X size={20} /> : <Menu size={20} />}
         </button>
       </header>
-      {/* HP, mode "atas": menu jadi tab yang bisa digeser di bawah header */}
-      {layout === "top" && <div className="m-tabs">{Nav}</div>}
-      {drawer && layout === "side" && <div className="drawer-backdrop" onClick={() => setDrawer(false)} aria-hidden="true" />}
       {drawer && (
-        <div className={`drawer ${layout}`} role="dialog" aria-modal="true" aria-label={T.menu}>
-          {layout === "side" && (
-            <button className="icon-btn drawer-x" onClick={() => setDrawer(false)} aria-label={T.close}><X size={18} /></button>
-          )}
+        <div className="drawer" role="dialog" aria-modal="true" aria-label={T.menu}>
           {Profile}
           {Toggles}
-          {layout === "side" && Nav}
-          {layout === "side" && <p className="drawer-foot">© 2026 {site.short}. {T.rights}</p>}
+          {Nav}
         </div>
       )}
 
@@ -767,7 +777,6 @@ export default function Portfolio() {
           <div className="page" key={page}>
             {page === "home" && <HomePage {...pageProps} />}
             {page === "about" && <AboutPage {...pageProps} />}
-            {page === "journey" && <JourneyPage {...pageProps} />}
             {page === "achievements" && <AchievementsPage {...pageProps} />}
             {page === "projects" && <ProjectsPage {...pageProps} />}
             {page === "dashboard" && <Dashboard {...pageProps} PageHead={PageHead} />}

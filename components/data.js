@@ -1,6 +1,13 @@
 // ✏️ Semua isi portofolio diedit di file ini.
 // Teks dua bahasa ditulis { id: "...", en: "..." }.
 
+// Musik favorit di halaman About (Spotify embed)
+export const spotify = [
+  { artist: "NIKI", id: "2kxP07DLgs4xlWz8YHlvfh" },
+  { artist: "Taylor Swift", id: "06HL4z0CvFAxyc27GXpf02" },
+  { artist: "LANY", id: "49tQo2QULno7gxHutgccqF" },
+];
+
 export const site = {
   name: "Monica Putri Lestari Panjaitan",
   short: "Lestari",
@@ -34,9 +41,7 @@ export const socials = [
 
 export const ui = {
   id: {
-    nav: { home: "Beranda", about: "Tentang", journey: "Perjalanan", achievements: "Pencapaian", projects: "Proyek", dashboard: "Dashboard", contact: "Kontak" },
-    journeySub: "Dari SMA sampai sekarang, urut dari yang paling baru.",
-    jtype: { edu: "Pendidikan", project: "Proyek", cert: "Sertifikat", org: "Organisasi", course: "Kursus", comp: "Lomba" },
+    nav: { home: "Beranda", about: "Tentang", achievements: "Pencapaian", projects: "Proyek", dashboard: "Dashboard", contact: "Kontak" },
     dash: {
       sub: "Statistik pengunjung portofolio ini dan aktivitas GitHub-ku, diperbarui otomatis.",
       visitors: "Analitik Pengunjung", visitorsSub: "Siapa saja yang mampir ke portofolio ini.",
@@ -67,6 +72,7 @@ export const ui = {
     tabNote: { official: "Sertifikasi, kompetisi, dan kepanitiaan.", course: "Sertifikat keikutsertaan dari mini course dan bootcamp — bukan sertifikasi resmi." },
     languages: "Bahasa", languagesSub: "Bahasa yang aku kuasai.",
     interests: "Minat lain",
+    dreamCap: "suatu hari nanti · Swiss", onRepeat: "Lagi sering diputar", onRepeatText: "Tiga nama yang paling sering muncul di playlist-ku. Pilih salah satu, lalu putar langsung di sini.", onRepeatHint: "Putar langsung di sini, musik latar web otomatis berhenti.",
     search: "Cari sertifikat...", total: "Total", empty: "Tidak ada yang cocok.",
     issued: "Diterbitkan", validUntil: "Berlaku sampai", credential: "ID kredensial", openPdf: "Buka PDF", verify: "Verifikasi",
     projSub: "Proyek yang pernah aku kerjakan, sebagian besar bersama tim.",
@@ -81,9 +87,7 @@ export const ui = {
     rights: "Hak cipta dilindungi.",
   },
   en: {
-    nav: { home: "Home", about: "About", journey: "Journey", achievements: "Achievements", projects: "Projects", dashboard: "Dashboard", contact: "Contact" },
-    journeySub: "From high school to now, newest first.",
-    jtype: { edu: "Education", project: "Project", cert: "Certificate", org: "Organization", course: "Course", comp: "Competition" },
+    nav: { home: "Home", about: "About", achievements: "Achievements", projects: "Projects", dashboard: "Dashboard", contact: "Contact" },
     dash: {
       sub: "Visitor statistics for this portfolio and my GitHub activity, updated automatically.",
       visitors: "Visitor Analytics", visitorsSub: "Who's been stopping by this portfolio.",
@@ -114,6 +118,7 @@ export const ui = {
     tabNote: { official: "Certifications, competitions and committees.", course: "Participation certificates from mini courses and bootcamps — not official certifications." },
     languages: "Languages", languagesSub: "Languages I speak.",
     interests: "Other interests",
+    dreamCap: "someday · Switzerland", onRepeat: "On repeat", onRepeatText: "The three names that show up most in my playlist. Pick one and play it right here.", onRepeatHint: "Play it right here, the site's background music pauses automatically.",
     search: "Search certificates...", total: "Total", empty: "Nothing matches.",
     issued: "Issued", validUntil: "Valid until", credential: "Credential ID", openPdf: "Open PDF", verify: "Verify",
     projSub: "Projects I've worked on, mostly as part of a team.",
@@ -132,15 +137,19 @@ export const ui = {
 export const about = {
   id: [
     "Halo! Aku Monica Putri Lestari Panjaitan, biasa dipanggil Lestari. Aku berasal dari Silaen, Toba, dan sekarang kuliah D3 Teknologi Informasi di Institut Teknologi Del (2024 – 2027).",
-    "Aku senang mengerjakan web dari sisi desain sampai kode. Di proyek akhir, aku merancang UI/UX dan prototipe di Figma lalu ikut membangunnya dengan Laravel dan MySQL — misalnya sistem pemesanan jahit online Web Firman Taylor dan aplikasi pemesanan Pardede Catering. Aku juga tertarik pada Software Quality Assurance, karena aplikasi yang baik bukan hanya enak dilihat tapi juga harus berjalan dengan benar.",
-    "Aku tersertifikasi Oracle AI Database Certified Foundations Associate, meraih juara 5 di Pixelnoid Dev Weekend Season 2 (Machine Learning + Laravel), dan aktif ikut pelatihan seperti bootcamp Data Engineer di Dibimbing. Di luar kelas aku pernah menjadi panitia Bebras Challenge 2025.",
-    "Saat ini aku sedang mencari kesempatan magang untuk terus belajar dan ikut membangun produk digital yang bermanfaat.",
+    "Di luar ngoding, aku hampir selalu ditemani lagu-lagu barat, dari NIKI, Taylor Swift, sampai LANY. Tempat impianku itu Swiss: rebahan di rumput hijaunya sambil memandangi gunung, tanpa mikirin deadline. Jadi untuk sekarang, aku lagi kerja keras dan nabung dulu, biar suatu hari bisa benar-benar sampai ke sana.",
+    "Soal bikin aplikasi, bagian yang paling aku suka itu desainnya. Biasanya aku mulai dari corat-coret di Figma dulu, baru lanjut ngoding pakai Laravel atau Next.js, terus aku tes pakai Katalon biar nggak ada yang error pas dipakai orang.",
+    "Proyek yang udah aku kerjain: Web Firman Taylor buat pesan jahitan online, aplikasi Pardede Catering buat pesan katering, AntreKita buat booking ruang diskusi di perpus kampus (yang ini aku bikin sendiri, ada asisten AI-nya juga!), sama InvoiceGuard, robot UiPath yang bantu ngecek invoice.",
+    "Aku juga udah nyelesain sertifikasi AWS Certified Cloud Practitioner, Oracle AI Database, dan Oracle Cloud AI Foundations. Pernah dapet juara 5 di Pixelnoid Dev Weekend, dan beberapa kali ikut jadi panitia acara kampus.",
+    "Sekarang aku lagi cari tempat magang buat belajar dari proyek beneran, sambil pelan-pelan nabung buat tiket ke Swiss.",
   ],
   en: [
     "Hi! I'm Monica Putri Lestari Panjaitan — most people call me Lestari. I'm from Silaen, Toba, and I'm studying for a Diploma 3 in Information Technology at Del Institute of Technology (2024 – 2027).",
-    "I like working on the web from design to code. In my final projects I designed the UI/UX and prototypes in Figma and helped build them with Laravel and MySQL — such as Web Firman Taylor, an online tailoring order system, and the Pardede Catering ordering app. I'm also interested in Software Quality Assurance, because a good app should not only look right but work right.",
-    "I'm an Oracle AI Database Certified Foundations Associate, placed 5th at Pixelnoid Dev Weekend Season 2 (Machine Learning + Laravel), and keep learning through programs like the Dibimbing Data Engineer bootcamp. Outside class I served on the Bebras Challenge 2025 committee.",
-    "I'm currently looking for an internship where I can keep learning and help build useful digital products.",
+    "Outside of code, there's almost always music playing, from NIKI and Taylor Swift to LANY. My dream place is Switzerland: lying on the green grass, looking at the mountains, and not thinking about deadlines for a while. So for now, I'm working hard and saving up, so one day I can actually be there.",
+    "When it comes to building apps, design is my favorite part. I usually start by sketching in Figma, then code it with Laravel or Next.js, and test it with Katalon so nothing breaks when people actually use it.",
+    "Some projects I've worked on: Web Firman Taylor for ordering tailoring online, the Pardede Catering app for ordering catering, AntreKita for booking discussion rooms at my campus library (built this one solo, with an AI assistant too!), and InvoiceGuard, a UiPath robot that helps check invoices.",
+    "I've also finished the AWS Certified Cloud Practitioner, Oracle AI Database, and Oracle Cloud AI Foundations certifications. I placed 5th at Pixelnoid Dev Weekend, and I've joined the committee for a few campus events.",
+    "Right now I'm looking for an internship where I can learn from real projects, while slowly saving up for that ticket to Switzerland.",
   ],
 };
 
@@ -165,25 +174,6 @@ export const education = [
     years: "2021 – 2024",
     logo: "/logos/sman1-silaen.png",
   },
-];
-
-// Perjalanan (timeline), urut dari yang terbaru. type: edu | project | cert | org | course | comp
-export const journey = [
-  { year: "2026", type: "cert", when: { id: "Nov", en: "Nov" }, title: "AWS Certified Cloud Practitioner", text: { id: "Sertifikasi resmi Amazon Web Services.", en: "Official Amazon Web Services certification." } },
-  { year: "2026", type: "cert", when: { id: "Nov", en: "Nov" }, title: "Oracle Cloud Infrastructure Certified AI Foundations Associate", text: { id: "Sertifikasi AI dari Oracle University.", en: "AI certification from Oracle University." } },
-  { year: "2026", type: "org", when: { id: "Okt", en: "Oct" }, title: { id: "Panitia Dokumentasi Kaderisasi Angkatan 2026", en: "Documentation Committee, Freshmen Cadre Program 2026" }, text: { id: "Mendokumentasikan kegiatan kaderisasi mahasiswa baru IT Del.", en: "Documented the freshmen cadre program at IT Del." } },
-  { year: "2026", type: "cert", when: { id: "Sep", en: "Sep" }, title: "Oracle AI Database Certified Foundations Associate", text: { id: "Sertifikasi resmi pertamaku.", en: "My first official certification." } },
-  { year: "2026", type: "course", when: { id: "Jul", en: "Jul" }, title: "Data Engineer Bootcamp (Dibimbing)", text: { id: "Bootcamp 5 hari tentang dasar data engineering.", en: "A 5-day bootcamp on data engineering fundamentals." } },
-  { year: "2026", type: "comp", when: { id: "Jul", en: "Jul" }, title: { id: "Juara 5 Pixelnoid Dev Weekend Season 2", en: "5th Place, Pixelnoid Dev Weekend Season 2" }, text: { id: "Kompetisi 2 hari: Machine Learning + Laravel.", en: "A 2-day competition: Machine Learning + Laravel." } },
-  { year: "2026", type: "course", when: { id: "Jul", en: "Jul" }, title: { id: "Mini course Cyber Security & AI Engineering", en: "Cyber Security & AI Engineering mini courses" }, text: { id: "Dua kelas singkat dari ReWork Academy.", en: "Two short courses from ReWork Academy." } },
-  { year: "2026", type: "project", when: { id: "2026", en: "2026" }, title: "AntreKita", text: { id: "Web booking ruang diskusi perpustakaan IT Del dengan asisten AI. Proyek pribadi.", en: "A room-booking web app for the IT Del library with an AI assistant. Personal project." } },
-  { year: "2026", type: "project", when: { id: "2026", en: "2026" }, title: "InvoiceGuard", text: { id: "Robot UiPath untuk Automation Hackathon.", en: "A UiPath robot for an Automation Hackathon." } },
-  { year: "2026", type: "project", when: { id: "2026", en: "2026" }, title: "Pardede Catering", text: { id: "Proyek Akhir 2: desain UI/UX, ikut ngoding, dan testing dengan Katalon.", en: "Final Project 2: UI/UX design, development, and testing with Katalon." } },
-  { year: "2026", type: "org", when: { id: "2026", en: "2026" }, title: { id: "Panitia Dekorasi Wisuda & Dies Natalis", en: "Decoration Committee, Graduation & Dies Natalis" }, text: { id: "Menyiapkan dekorasi acara wisuda dan inaugurasi IT Del.", en: "Prepared decorations for IT Del's graduation and inauguration." } },
-  { year: "2025", type: "org", when: { id: "Nov", en: "Nov" }, title: { id: "Panitia Bebras Challenge 2025", en: "Committee Member, Bebras Challenge 2025" }, text: { id: "Ikut menjalankan tantangan berpikir komputasional untuk siswa sekolah.", en: "Helped run a computational-thinking challenge for school students." } },
-  { year: "2025", type: "project", when: { id: "2025", en: "2025" }, title: "Web Firman Taylor", text: { id: "Proyek Akhir 1: website pemesanan jahit online.", en: "Final Project 1: an online tailoring order website." } },
-  { year: "2024", type: "edu", when: { id: "Sep", en: "Sep" }, title: { id: "Mulai kuliah di Institut Teknologi Del", en: "Started college at Del Institute of Technology" }, text: { id: "Program studi Teknologi Informasi.", en: "Information Technology program." } },
-  { year: "2024", type: "edu", when: { id: "2021 – 2024", en: "2021 – 2024" }, title: { id: "Lulus SMA Negeri 1 Silaen", en: "Graduated from SMA Negeri 1 Silaen" }, text: { id: "Jurusan IPA.", en: "Science program." } },
 ];
 
 export const experience = [
