@@ -161,13 +161,6 @@ export const education = [
     years: "2021 – 2024",
     logo: "/logos/sman1-silaen.png",
   },
-  {
-    school: "SD Negeri 174556 Sitorang",
-    detail: { id: "Sekolah Dasar", en: "Elementary School" },
-    place: "Silaen, Toba",
-    years: "", // ✏️ isi tahunnya, mis. "2015 – 2021"
-    logo: "/logos/sdn-174556-sitorang.png",
-  },
 ];
 
 export const experience = [

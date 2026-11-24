@@ -496,7 +496,9 @@ export default function Portfolio() {
   // Pengaturan tersimpan + halaman dari URL (#about, dst.)
   useEffect(() => {
     setTheme(document.documentElement.dataset.theme || "light");
-    setLayout(document.documentElement.dataset.layout === "top" ? "top" : "side");
+    const lay = document.documentElement.dataset.layout || store.get("layout");
+    setLayout(lay === "top" ? "top" : "side");
+    document.documentElement.dataset.layout = lay === "top" ? "top" : "side";
     const l = store.get("lang");
     if (l === "en" || l === "id") setLang(l);
     const fromHash = () => {
@@ -625,7 +627,7 @@ export default function Portfolio() {
     const place = (instant) => document.querySelectorAll(".nav").forEach((nav) => {
       const a = nav.querySelector("a.on"), ink = nav.querySelector(".nav-ink");
       if (!a || !ink) return;
-      const top = !!nav.closest(".topbar");
+      const top = !!nav.closest(".topbar, .m-tabs");
       if (instant) ink.style.transition = "none";
       ink.style.width = `${a.offsetWidth}px`;
       ink.style.height = top ? "2px" : `${a.offsetHeight}px`;
@@ -693,15 +695,23 @@ export default function Portfolio() {
           <img src={site.avatar} alt="" />
           <span className="mb-name">{site.name}</span>
         </a>
+        {LayoutBtn}
         <button className="icon-btn" onClick={() => setDrawer((d) => !d)} aria-label={T.menu} aria-expanded={drawer}>
           {drawer ? <X size={20} /> : <Menu size={20} />}
         </button>
       </header>
+      {/* HP, mode "atas": menu jadi tab yang bisa digeser di bawah header */}
+      {layout === "top" && <div className="m-tabs">{Nav}</div>}
+      {drawer && layout === "side" && <div className="drawer-backdrop" onClick={() => setDrawer(false)} aria-hidden="true" />}
       {drawer && (
-        <div className="drawer" role="dialog" aria-modal="true" aria-label={T.menu}>
+        <div className={`drawer ${layout}`} role="dialog" aria-modal="true" aria-label={T.menu}>
+          {layout === "side" && (
+            <button className="icon-btn drawer-x" onClick={() => setDrawer(false)} aria-label={T.close}><X size={18} /></button>
+          )}
           {Profile}
           {Toggles}
-          {Nav}
+          {layout === "side" && Nav}
+          {layout === "side" && <p className="drawer-foot">© 2026 {site.short}. {T.rights}</p>}
         </div>
       )}
 
